@@ -37,6 +37,28 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
 
+  <meta name="author" content="Nhóm dự án EV_SAFE HUB">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta name="application-name" content="EV_SAFE HUB">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "EV_SAFE HUB",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "Android",
+    "description": "Nền tảng nguyên mẫu giám sát và quản lý trạm sạc xe điện thông minh, tích hợp theo dõi điện năng, nhiệt độ, cảnh báo, lịch sử phiên sạc và chỉ số xu hướng pin.",
+    "url": "https://nguyentantue2009-cloud.github.io/ev-safe-hub-2026/",
+    "author": {
+      "@type": "Organization",
+      "name": "Nhóm dự án EV_SAFE HUB — Trường THPT Cao Bá Quát"
+    }
+  }
+  </script>
+
   <script>
     (() => {
       const savedTheme =
@@ -1746,10 +1768,899 @@
         min-height: 460px;
       }
     }
+
+
+    /* =========================================================
+       EV_SAFE HUB — PREMIUM EXPERIENCE LAYER
+       Hiệu ứng thuần CSS/JavaScript, không phụ thuộc thư viện ngoài.
+       ========================================================= */
+
+    :root {
+      --cyan: #18b7e9;
+      --cyan-soft: rgba(24, 183, 233, 0.15);
+      --green: #17c4a5;
+      --danger: #ed4953;
+      --warning: #ff9e1b;
+      --premium-line: linear-gradient(90deg, #0875df, #18b7e9, #17c4a5);
+    }
+
+    body {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .scroll-progress {
+      position: fixed;
+      inset: 0 auto auto 0;
+      z-index: 1000;
+      width: 0;
+      height: 3px;
+      background: var(--premium-line);
+      box-shadow: 0 0 18px rgba(24, 183, 233, 0.65);
+      pointer-events: none;
+      transition: width 0.08s linear;
+    }
+
+    .ambient-scene {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .ambient-orb {
+      position: absolute;
+      width: 34rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.16;
+      animation: ambientFloat 18s ease-in-out infinite alternate;
+    }
+
+    .ambient-orb.one {
+      top: -13rem;
+      left: -13rem;
+      background: #168af4;
+    }
+
+    .ambient-orb.two {
+      top: 34%;
+      right: -17rem;
+      background: #15c4a3;
+      animation-delay: -7s;
+    }
+
+    .ambient-orb.three {
+      bottom: -17rem;
+      left: 30%;
+      background: #7058ff;
+      animation-delay: -12s;
+    }
+
+    @keyframes ambientFloat {
+      from { transform: translate3d(0, 0, 0) scale(0.95); }
+      to { transform: translate3d(45px, 34px, 0) scale(1.08); }
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(24, 183, 233, 0.55);
+      outline-offset: 4px;
+    }
+
+    .site-header::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 1px;
+      opacity: 0;
+      background: var(--premium-line);
+      transition: opacity 0.25s ease;
+    }
+
+    .site-header.scrolled::after {
+      opacity: 0.48;
+    }
+
+    .brand-mark {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      inset: -70% -35%;
+      background: linear-gradient(110deg, transparent 42%, rgba(255,255,255,.65), transparent 58%);
+      transform: translateX(-75%) rotate(10deg);
+      animation: logoShine 5.8s ease-in-out infinite;
+    }
+
+    @keyframes logoShine {
+      0%, 65% { transform: translateX(-75%) rotate(10deg); }
+      82%, 100% { transform: translateX(75%) rotate(10deg); }
+    }
+
+    .main-nav a {
+      position: relative;
+    }
+
+    .main-nav a::after {
+      content: "";
+      position: absolute;
+      right: 12px;
+      bottom: 5px;
+      left: 12px;
+      height: 2px;
+      border-radius: 99px;
+      background: var(--premium-line);
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform .22s ease;
+    }
+
+    .main-nav a:hover::after,
+    .main-nav a.active::after {
+      transform: scaleX(1);
+    }
+
+    .button {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .button::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: linear-gradient(105deg, transparent 30%, rgba(255,255,255,.28), transparent 70%);
+      transform: translateX(-120%);
+      transition: transform .62s ease;
+    }
+
+    .button:hover::before {
+      transform: translateX(120%);
+    }
+
+    .card,
+    .feature-item,
+    .technology-grid article,
+    .trust-item {
+      transition: transform .25s ease, border-color .25s ease, box-shadow .25s ease;
+    }
+
+    .card:hover,
+    .feature-item:hover,
+    .technology-grid article:hover,
+    .trust-item:hover {
+      transform: translateY(-5px);
+      border-color: rgba(24, 183, 233, .34);
+      box-shadow: 0 22px 58px rgba(20, 69, 111, .14);
+    }
+
+    .hero {
+      position: relative;
+      overflow: clip;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: .34;
+      background-image:
+        linear-gradient(rgba(8,117,223,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(8,117,223,.055) 1px, transparent 1px);
+      background-size: 52px 52px;
+      mask-image: linear-gradient(to bottom, black, transparent 86%);
+      animation: gridDrift 22s linear infinite;
+    }
+
+    @keyframes gridDrift {
+      to { background-position: 52px 52px; }
+    }
+
+    .project-status {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      padding: 8px 12px;
+      border: 1px solid rgba(23,196,165,.24);
+      border-radius: 999px;
+      color: var(--teal);
+      background: var(--teal-soft);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: .035em;
+    }
+
+    .project-status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #18c99f;
+      box-shadow: 0 0 0 0 rgba(24,201,159,.45);
+      animation: statusPulse 2s ease-out infinite;
+    }
+
+    @keyframes statusPulse {
+      70% { box-shadow: 0 0 0 10px rgba(24,201,159,0); }
+      100% { box-shadow: 0 0 0 0 rgba(24,201,159,0); }
+    }
+
+    .station-frame {
+      position: relative;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .station-frame::before {
+      content: "";
+      position: absolute;
+      width: 21rem;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: conic-gradient(from 80deg, rgba(8,117,223,.34), rgba(23,196,165,.33), rgba(112,88,255,.20), rgba(8,117,223,.34));
+      filter: blur(40px);
+      opacity: .62;
+      animation: haloSpin 14s linear infinite;
+    }
+
+    @keyframes haloSpin { to { transform: rotate(360deg); } }
+
+    .station-product {
+      position: relative;
+      z-index: 2;
+      animation: deviceFloat 5.5s ease-in-out infinite;
+    }
+
+    @keyframes deviceFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .floating-chip {
+      position: absolute;
+      z-index: 3;
+      padding: 9px 12px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: var(--text);
+      background: var(--surface-solid);
+      box-shadow: var(--shadow-small);
+      font-size: 11px;
+      font-weight: 850;
+      backdrop-filter: blur(12px);
+    }
+
+    .floating-chip.chip-one { top: 13%; left: 5%; animation: chipFloat 4.8s ease-in-out infinite; }
+    .floating-chip.chip-two { right: 4%; bottom: 18%; animation: chipFloat 5.2s ease-in-out infinite reverse; }
+    .floating-chip.chip-three { bottom: 7%; left: 9%; animation: chipFloat 4.4s ease-in-out infinite .8s; }
+
+    @keyframes chipFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-7px); }
+    }
+
+    .section-heading h2 {
+      text-wrap: balance;
+    }
+
+    .solution-icon {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .solution-icon::after {
+      content: "";
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      border: 1px solid rgba(8,117,223,.22);
+      border-radius: 50%;
+      animation: iconOrbit 7s linear infinite;
+    }
+
+    @keyframes iconOrbit { to { transform: rotate(360deg) scale(1.25); } }
+
+    /* ================= ỨNG DỤNG THẬT ================= */
+
+    .app-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .app-section::before {
+      content: "";
+      position: absolute;
+      inset: 6% auto auto 50%;
+      width: min(900px, 96vw);
+      height: 620px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(8,117,223,.13), rgba(23,196,165,.08) 38%, transparent 70%);
+      transform: translateX(-50%);
+      pointer-events: none;
+    }
+
+    .app-showcase {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(310px, .82fr) minmax(0, 1.18fr);
+      gap: clamp(42px, 7vw, 92px);
+      align-items: center;
+    }
+
+    .app-device-column {
+      min-width: 0;
+      display: grid;
+      justify-items: center;
+      gap: 20px;
+    }
+
+    .app-device-wrap {
+      position: relative;
+      width: min(390px, 84vw);
+    }
+
+    .app-device-glow {
+      position: absolute;
+      inset: 8% -13% -7%;
+      z-index: -1;
+      border-radius: 44%;
+      background: linear-gradient(145deg, rgba(8,117,223,.36), rgba(23,196,165,.30));
+      filter: blur(48px);
+      opacity: .55;
+      animation: glowBreath 4.5s ease-in-out infinite;
+    }
+
+    @keyframes glowBreath {
+      0%,100% { transform: scale(.95); opacity: .45; }
+      50% { transform: scale(1.04); opacity: .68; }
+    }
+
+    .app-device {
+      position: relative;
+      width: 100%;
+      padding: 11px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 48px;
+      background: linear-gradient(155deg, #0c1825, #020810 58%, #11273b);
+      box-shadow: 0 42px 95px rgba(2,13,26,.43), inset 0 0 0 1px rgba(255,255,255,.06);
+      transform: perspective(1200px) rotateY(0deg) rotateX(0deg);
+      transition: transform .25s ease;
+      touch-action: pan-y;
+    }
+
+    .app-device::before {
+      content: "";
+      position: absolute;
+      top: 15px;
+      left: 50%;
+      z-index: 5;
+      width: 31%;
+      height: 25px;
+      border-radius: 0 0 15px 15px;
+      background: #050b12;
+      transform: translateX(-50%);
+      box-shadow: 0 1px 0 rgba(255,255,255,.08);
+    }
+
+    .app-device-screen {
+      position: relative;
+      aspect-ratio: 899 / 2048;
+      overflow: hidden;
+      border-radius: 38px;
+      background: #eef5fa;
+    }
+
+    .app-device-screen::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: linear-gradient(118deg, rgba(255,255,255,.18), transparent 18%, transparent 72%, rgba(255,255,255,.08));
+      mix-blend-mode: screen;
+    }
+
+    .app-preview-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transform: scale(1.001);
+      opacity: 1;
+      transition: opacity .26s ease, transform .45s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .app-preview-image.switching {
+      opacity: .08;
+      transform: scale(1.025) translateY(5px);
+    }
+
+    .app-device-hint {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+      text-align: center;
+    }
+
+    .app-device-hint span {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 6px var(--teal-soft);
+    }
+
+    .app-content-panel {
+      position: relative;
+      padding: clamp(28px, 5vw, 54px);
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 32px;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.10), transparent 45%),
+        var(--surface);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .app-content-panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 3px;
+      background: var(--premium-line);
+    }
+
+    .app-live-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 17px;
+      padding: 7px 11px;
+      border: 1px solid rgba(24,183,233,.24);
+      border-radius: 999px;
+      color: var(--primary);
+      background: var(--primary-soft);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .app-live-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      box-shadow: 0 0 0 5px var(--teal-soft);
+    }
+
+    .app-content-panel h2 {
+      margin-bottom: 17px;
+      font-size: clamp(2.25rem, 4.4vw, 4.25rem);
+    }
+
+    .app-description {
+      min-height: 78px;
+      font-size: 1.06rem;
+    }
+
+    .app-facts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 24px 0 28px;
+    }
+
+    .app-fact {
+      min-height: 87px;
+      padding: 15px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: color-mix(in srgb, var(--surface-solid) 88%, transparent);
+    }
+
+    .app-fact b,
+    .app-fact span {
+      display: block;
+    }
+
+    .app-fact b {
+      margin-bottom: 4px;
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    .app-fact span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .app-selector {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .app-tab {
+      min-width: 0;
+      padding: 13px 8px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--muted);
+      background: transparent;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .app-tab:hover {
+      transform: translateY(-2px);
+      color: var(--text);
+      border-color: rgba(8,117,223,.38);
+    }
+
+    .app-tab.active {
+      color: #fff;
+      border-color: transparent;
+      background: linear-gradient(135deg, var(--primary), var(--teal));
+      box-shadow: 0 12px 28px rgba(8,117,223,.23);
+    }
+
+    .app-tab-icon,
+    .app-tab-label {
+      display: block;
+    }
+
+    .app-tab-icon {
+      margin-bottom: 5px;
+      font-size: 18px;
+    }
+
+    .app-tab-label {
+      overflow: hidden;
+      font-size: 10px;
+      font-weight: 850;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .app-counter {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .app-progress-track {
+      height: 4px;
+      flex: 1;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--line);
+    }
+
+    .app-progress-value {
+      width: 20%;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--premium-line);
+      transition: width .35s ease;
+    }
+
+    .app-gallery {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 13px;
+      margin-top: 38px;
+    }
+
+    .app-thumb {
+      position: relative;
+      min-width: 0;
+      overflow: hidden;
+      padding: 0;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: var(--surface);
+      box-shadow: var(--shadow-small);
+      cursor: pointer;
+      transition: transform .22s ease, border-color .22s ease;
+    }
+
+    .app-thumb:hover,
+    .app-thumb.active {
+      transform: translateY(-5px);
+      border-color: rgba(24,183,233,.54);
+    }
+
+    .app-thumb-image {
+      aspect-ratio: 899 / 1180;
+      overflow: hidden;
+      background: var(--bg-soft);
+    }
+
+    .app-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      transition: transform .35s ease;
+    }
+
+    .app-thumb:hover img {
+      transform: scale(1.035);
+    }
+
+    .app-thumb span {
+      display: block;
+      padding: 12px 10px;
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 850;
+      text-align: center;
+    }
+
+    /* ================= GIẤY PHÉP ================= */
+
+    .license-section {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .license-shell {
+      position: relative;
+      overflow: hidden;
+      padding: clamp(30px, 6vw, 68px);
+      border: 1px solid var(--line);
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at 90% 0%, rgba(24,183,233,.14), transparent 35%),
+        radial-gradient(circle at 5% 95%, rgba(23,196,165,.12), transparent 38%),
+        var(--surface);
+      box-shadow: var(--shadow);
+    }
+
+    .license-shell::before {
+      content: "EVSH";
+      position: absolute;
+      right: -20px;
+      bottom: -78px;
+      color: rgba(8,117,223,.05);
+      font-size: clamp(8rem, 22vw, 18rem);
+      font-weight: 950;
+      letter-spacing: -.08em;
+      pointer-events: none;
+    }
+
+    .license-header {
+      position: relative;
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 34px;
+      align-items: end;
+      margin-bottom: 32px;
+    }
+
+    .license-id-card {
+      padding: 20px;
+      border: 1px solid rgba(24,183,233,.26);
+      border-radius: 20px;
+      background: linear-gradient(135deg, var(--primary-soft), var(--teal-soft));
+    }
+
+    .license-id-card code {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--primary);
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .license-id-card span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .license-grid {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .license-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      background: color-mix(in srgb, var(--surface-solid) 88%, transparent);
+    }
+
+    .license-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+      font-size: 1.14rem;
+    }
+
+    .license-card p,
+    .license-card li {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .license-card ul {
+      margin: 0;
+      padding-left: 19px;
+    }
+
+    .license-card li + li {
+      margin-top: 7px;
+    }
+
+    .license-warning {
+      position: relative;
+      margin-top: 14px;
+      padding: 20px;
+      border: 1px solid rgba(237,73,83,.22);
+      border-radius: 20px;
+      background: rgba(237,73,83,.07);
+    }
+
+    .license-warning strong {
+      color: var(--danger);
+    }
+
+    .license-actions {
+      position: relative;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .license-details {
+      position: relative;
+      margin-top: 16px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--surface-solid);
+    }
+
+    .license-details summary {
+      padding: 17px 20px;
+      color: var(--text);
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .license-details-content {
+      padding: 0 20px 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .license-details-content ol {
+      margin-bottom: 0;
+      padding-left: 20px;
+    }
+
+    .license-details-content li + li {
+      margin-top: 8px;
+    }
+
+    /* Better motion staging */
+    .reveal:nth-child(2n) { transition-delay: .045s; }
+    .reveal:nth-child(3n) { transition-delay: .09s; }
+
+    @media (max-width: 1050px) {
+      .app-showcase,
+      .license-header {
+        grid-template-columns: 1fr;
+      }
+
+      .app-content-panel {
+        order: -1;
+      }
+
+      .app-gallery {
+        grid-template-columns: repeat(5, 170px);
+        overflow-x: auto;
+        padding: 2px 2px 16px;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: thin;
+      }
+
+      .app-thumb {
+        scroll-snap-align: start;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .project-status {
+        margin-inline: auto;
+      }
+
+      .floating-chip {
+        display: none;
+      }
+
+      .app-content-panel {
+        padding: 25px 19px;
+        border-radius: 24px;
+      }
+
+      .app-facts,
+      .license-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .app-selector {
+        grid-template-columns: repeat(5, 58px);
+        justify-content: space-between;
+        overflow-x: auto;
+        padding-bottom: 5px;
+      }
+
+      .app-tab {
+        width: 58px;
+      }
+
+      .app-tab-label {
+        font-size: 9px;
+      }
+
+      .app-description {
+        min-height: 0;
+      }
+
+      .license-shell {
+        padding: 25px 18px;
+        border-radius: 25px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
   </style>
 </head>
 
 <body>
+
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+  <div class="ambient-scene" aria-hidden="true">
+    <span class="ambient-orb one"></span>
+    <span class="ambient-orb two"></span>
+    <span class="ambient-orb three"></span>
+  </div>
   <header
     class="site-header"
     id="siteHeader"
@@ -1810,6 +2721,10 @@
           Hồ sơ
         </a>
 
+        <a href="#giay-phep">
+          Giấy phép
+        </a>
+
         <a href="#lien-he">
           Liên hệ
         </a>
@@ -1846,6 +2761,11 @@
     >
       <div class="container hero-grid">
         <div class="hero-copy reveal">
+          <div class="project-status">
+            <span class="project-status-dot" aria-hidden="true"></span>
+            Nguyên mẫu hoạt động • Hồ sơ dự thi 2026
+          </div>
+
           <div class="eyebrow">
             Hồ sơ dự thi chính thức năm 2026
           </div>
@@ -1955,6 +2875,10 @@
               </div>
             </div>
           </div>
+
+          <span class="floating-chip chip-one">PMC-220 • Modbus RS485</span>
+          <span class="floating-chip chip-two">WebSocket realtime</span>
+          <span class="floating-chip chip-three">Safety interlock</span>
         </div>
       </div>
     </section>
@@ -2379,106 +3303,174 @@
       </div>
     </section>
 
-    <!-- ỨNG DỤNG -->
+    <!-- ỨNG DỤNG — ẢNH GIAO DIỆN THẬT -->
 
     <section
-      class="section"
+      class="section app-section"
       id="ung-dung"
     >
-      <div class="container application-grid">
-        <div class="phone-stage reveal">
-          <div class="phone">
-            <div class="phone-screen">
-              <div class="phone-heading">
-                <small>
-                  EV_SAFE HUB
-                </small>
-
-                <h3 id="phoneTitle">
-                  Tổng quan trạm
-                </h3>
-              </div>
-
-              <div
-                class="phone-body"
-                id="phoneBody"
-              >
-                <div class="phone-card">
-                  <b>
-                    Trạm CBQ-01 — ONLINE
-                  </b>
-
-                  <p>
-                    Sẵn sàng
-                  </p>
-                </div>
-
-                <div class="phone-row">
-                  <div class="phone-card">
-                    220.8 V
-                  </div>
-
-                  <div class="phone-card">
-                    31.4°C
-                  </div>
-                </div>
-
-                <div class="phone-main-button">
-                  BẮT ĐẦU PHIÊN SẠC
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="reveal">
+      <div class="container">
+        <div class="section-heading center reveal">
           <div class="eyebrow">
             Ứng dụng EV_SAFE HUB
           </div>
 
           <h2>
-            Điều khiển, theo dõi và giải thích trạng
-            thái trên điện thoại.
+            Giao diện thật. Dữ liệu rõ. Quyết định nhanh.
           </h2>
 
           <p>
-            Chọn trạm, bắt đầu phiên, xem cảnh báo,
-            lịch sử và xu hướng pin.
+            Bộ ảnh dưới đây được lấy trực tiếp từ ứng dụng Android EV_SAFE HUB,
+            thay cho mô phỏng giao diện cũ. Mỗi màn hình tập trung vào một nhiệm vụ
+            vận hành riêng: tổng quan, giám sát realtime, phân tích pin, lịch sử và trạm sạc.
           </p>
+        </div>
 
-          <div class="screen-selector">
-            <button
-              class="screen-button active"
-              type="button"
-              data-screen="overview"
-            >
-              Tổng quan
-            </button>
+        <div class="app-showcase">
+          <div class="app-device-column reveal">
+            <div class="app-device-wrap">
+              <div class="app-device-glow" aria-hidden="true"></div>
 
-            <button
-              class="screen-button"
-              type="button"
-              data-screen="session"
-            >
-              Phiên sạc realtime
-            </button>
+              <div
+                class="app-device"
+                id="appDevice"
+                tabindex="0"
+                aria-label="Bản xem trước màn hình Tổng quan của ứng dụng EV SAFE HUB"
+              >
+                <div class="app-device-screen">
+                  <img
+                    class="app-preview-image"
+                    id="appPreviewImage"
+                    src="./assets/app/app-overview.jpg"
+                    alt="Màn hình Tổng quan ứng dụng EV SAFE HUB hiển thị dung lượng pin, điện áp, dòng sạc và trạng thái kết nối"
+                    width="899"
+                    height="2048"
+                    decoding="async"
+                    fetchpriority="high"
+                  >
+                </div>
+              </div>
+            </div>
 
-            <button
-              class="screen-button"
-              type="button"
-              data-screen="battery"
-            >
-              BQS / SOH tham khảo
-            </button>
-
-            <button
-              class="screen-button"
-              type="button"
-              data-screen="alerts"
-            >
-              Cảnh báo và lịch sử
-            </button>
+            <div class="app-device-hint">
+              <span aria-hidden="true"></span>
+              Chạm nút chức năng hoặc vuốt ngang trên điện thoại để đổi màn hình
+            </div>
           </div>
+
+          <div class="app-content-panel reveal" id="appShowcasePanel">
+            <div class="app-live-label">
+              Flutter • Android • Realtime
+            </div>
+
+            <h2 id="appShowcaseTitle">
+              Tổng quan vận hành theo thời gian thực
+            </h2>
+
+            <p class="app-description" id="appShowcaseDescription">
+              Màn hình trung tâm tổng hợp dung lượng pin ước tính, điện áp, dòng sạc,
+              trạng thái phiên, trạm đang sử dụng và kết nối dữ liệu để người dùng
+              nắm bắt toàn bộ hệ thống trong một lần nhìn.
+            </p>
+
+            <div class="app-facts" id="appShowcaseFacts">
+              <div class="app-fact">
+                <b>Dung lượng pin</b>
+                <span>Hiển thị trực quan theo phần trăm</span>
+              </div>
+
+              <div class="app-fact">
+                <b>Điện áp và dòng sạc</b>
+                <span>Dữ liệu realtime từ trạm</span>
+              </div>
+
+              <div class="app-fact">
+                <b>Rủi ro pin</b>
+                <span>Chỉ số sàng lọc BQS</span>
+              </div>
+
+              <div class="app-fact">
+                <b>Trạng thái kết nối</b>
+                <span>MQTT / HTTP / WebSocket</span>
+              </div>
+            </div>
+
+            <div
+              class="app-selector"
+              role="tablist"
+              aria-label="Chọn màn hình ứng dụng EV SAFE HUB"
+            >
+              <button class="app-tab active" type="button" role="tab" aria-selected="true" data-app-screen="overview">
+                <span class="app-tab-icon">⌂</span>
+                <span class="app-tab-label">Tổng quan</span>
+              </button>
+
+              <button class="app-tab" type="button" role="tab" aria-selected="false" data-app-screen="realtime">
+                <span class="app-tab-icon">⌁</span>
+                <span class="app-tab-label">Realtime</span>
+              </button>
+
+              <button class="app-tab" type="button" role="tab" aria-selected="false" data-app-screen="battery">
+                <span class="app-tab-icon">▣</span>
+                <span class="app-tab-label">Pin</span>
+              </button>
+
+              <button class="app-tab" type="button" role="tab" aria-selected="false" data-app-screen="history">
+                <span class="app-tab-icon">◷</span>
+                <span class="app-tab-label">Lịch sử</span>
+              </button>
+
+              <button class="app-tab" type="button" role="tab" aria-selected="false" data-app-screen="stations">
+                <span class="app-tab-icon">⌖</span>
+                <span class="app-tab-label">Trạm sạc</span>
+              </button>
+            </div>
+
+            <div class="app-counter" aria-hidden="true">
+              <span id="appCounterText">01 / 05</span>
+              <span class="app-progress-track">
+                <span class="app-progress-value" id="appProgressValue"></span>
+              </span>
+              <span>Ảnh giao diện thực tế</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="app-gallery reveal" aria-label="Thư viện ảnh ứng dụng EV SAFE HUB">
+          <button class="app-thumb active" type="button" data-app-screen="overview">
+            <span class="app-thumb-image">
+              <img src="./assets/app/app-overview.jpg" alt="Ảnh thu nhỏ màn hình Tổng quan" width="899" height="2048" loading="lazy" decoding="async">
+            </span>
+            <span>Tổng quan hệ thống</span>
+          </button>
+
+          <button class="app-thumb" type="button" data-app-screen="realtime">
+            <span class="app-thumb-image">
+              <img src="./assets/app/app-realtime.jpg" alt="Ảnh thu nhỏ màn hình Theo dõi realtime" width="899" height="2048" loading="lazy" decoding="async">
+            </span>
+            <span>Biểu đồ realtime</span>
+          </button>
+
+          <button class="app-thumb" type="button" data-app-screen="battery">
+            <span class="app-thumb-image">
+              <img src="./assets/app/app-battery.jpg" alt="Ảnh thu nhỏ màn hình phân tích BQS và SOH" width="899" height="2048" loading="lazy" decoding="async">
+            </span>
+            <span>Phân tích pin</span>
+          </button>
+
+          <button class="app-thumb" type="button" data-app-screen="history">
+            <span class="app-thumb-image">
+              <img src="./assets/app/app-history.jpg" alt="Ảnh thu nhỏ màn hình lịch sử phiên sạc" width="899" height="2048" loading="lazy" decoding="async">
+            </span>
+            <span>Lịch sử phiên sạc</span>
+          </button>
+
+          <button class="app-thumb" type="button" data-app-screen="stations">
+            <span class="app-thumb-image">
+              <img src="./assets/app/app-stations.jpg" alt="Ảnh thu nhỏ màn hình danh sách trạm sạc" width="899" height="2048" loading="lazy" decoding="async">
+            </span>
+            <span>Trạm nội bộ & cộng đồng</span>
+          </button>
         </div>
       </div>
     </section>
@@ -2963,6 +3955,128 @@
               </p>
             </div>
           </div>
+
+          <div class="faq-item">
+            <button class="faq-question" type="button">
+              Tôi có thể sử dụng mã nguồn hoặc hình ảnh của dự án không?
+              <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                Được phép xem, đánh giá và trích dẫn cho mục đích giáo dục khi ghi nguồn đầy đủ.
+                Việc thương mại hóa, đổi thương hiệu hoặc triển khai an toàn trọng yếu cần có chấp thuận
+                bằng văn bản theo giấy phép EVSH-RD-1.0.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GIẤY PHÉP VÀ TUYÊN BỐ PHẠM VI -->
+
+    <section
+      class="section section-soft license-section"
+      id="giay-phep"
+    >
+      <div class="container">
+        <div class="license-shell reveal">
+          <div class="license-header">
+            <div>
+              <div class="eyebrow">
+                Giấy phép và tính liêm chính khoa học
+              </div>
+
+              <h2>
+                Quyền sử dụng minh bạch, phạm vi kỹ thuật rõ ràng.
+              </h2>
+
+              <p>
+                EV_SAFE HUB được công bố dưới dạng nguyên mẫu nghiên cứu – giáo dục.
+                Phần này xác định quyền xem, đánh giá, trích dẫn và các giới hạn bắt buộc
+                nhằm tránh sử dụng sai mục đích hoặc diễn giải quá mức kết quả thử nghiệm.
+              </p>
+            </div>
+
+            <div class="license-id-card">
+              <code>EVSH-RD-1.0</code>
+              <span>Giấy phép trình diễn và đánh giá nguyên mẫu • Hiệu lực từ 25/07/2026</span>
+            </div>
+          </div>
+
+          <div class="license-grid">
+            <article class="license-card">
+              <h3>✓ Quyền được phép</h3>
+              <ul>
+                <li>Xem, chạy thử và đánh giá website, ứng dụng cùng nguyên mẫu trong hoạt động giáo dục, nghiên cứu và chấm thi.</li>
+                <li>Trích dẫn hình ảnh hoặc đoạn mô tả ngắn khi ghi rõ tên “EV_SAFE HUB”, nhóm tác giả và nguồn liên kết chính thức.</li>
+                <li>Sao lưu nội bộ phục vụ đánh giá kỹ thuật, với điều kiện không phát hành lại như một sản phẩm độc lập.</li>
+              </ul>
+            </article>
+
+            <article class="license-card">
+              <h3>⊘ Giới hạn sử dụng</h3>
+              <ul>
+                <li>Không thương mại hóa, bán lại, đổi thương hiệu hoặc triển khai như thiết bị sạc công cộng đã được chứng nhận khi chưa có chấp thuận bằng văn bản.</li>
+                <li>Không loại bỏ thông tin tác giả, thông báo bản quyền, cảnh báo kỹ thuật hoặc giấy phép của thành phần bên thứ ba.</li>
+                <li>Không sử dụng mã, sơ đồ hoặc thông số thử nghiệm để vận hành hệ thống an toàn trọng yếu nếu chưa được thẩm định độc lập.</li>
+              </ul>
+            </article>
+
+            <article class="license-card">
+              <h3>⚙ Phạm vi kỹ thuật</h3>
+              <ul>
+                <li>Các giá trị điện, nhiệt, năng lượng và trạng thái được dùng cho giám sát nguyên mẫu trong điều kiện thử nghiệm.</li>
+                <li>BQS và SOH là chỉ số sàng lọc, tham khảo xu hướng; không thay thế dữ liệu BMS, đo kiểm phòng thí nghiệm hoặc kết luận an toàn pin.</li>
+                <li>Kết quả có thể thay đổi theo cảm biến, hiệu chuẩn, mạng truyền thông, tải, môi trường và cấu hình phần cứng.</li>
+              </ul>
+            </article>
+
+            <article class="license-card">
+              <h3>◇ Thành phần bên thứ ba</h3>
+              <ul>
+                <li>PDF.js và các thư viện, biểu tượng hoặc thành phần mã nguồn bên thứ ba tiếp tục tuân theo giấy phép gốc của từng tác giả.</li>
+                <li>Giấy phép EVSH-RD-1.0 không thay thế, mở rộng hoặc thu hẹp quyền của các giấy phép bên thứ ba.</li>
+                <li>Khi tái sử dụng, người dùng có trách nhiệm kiểm tra tệp THIRD_PARTY_LICENSE và thông báo kèm theo từng thành phần.</li>
+              </ul>
+            </article>
+          </div>
+
+          <div class="license-warning">
+            <strong>Tuyên bố an toàn:</strong> EV_SAFE HUB hiện là nguyên mẫu nghiên cứu và giáo dục,
+            không phải trạm sạc thương mại đã được chứng nhận. Nhóm tác giả không bảo đảm hệ thống phù hợp
+            cho mọi môi trường triển khai và không chịu trách nhiệm cho việc sử dụng ngoài phạm vi thử nghiệm,
+            đánh giá hoặc trình diễn đã nêu.
+          </div>
+
+          <details class="license-details">
+            <summary>Xem đầy đủ nguyên tắc sử dụng và công bố kết quả</summary>
+            <div class="license-details-content">
+              <ol>
+                <li><b>Ghi nguồn:</b> mọi tài liệu dẫn lại phải ghi rõ tên dự án, nhóm tác giả, năm 2026 và đường dẫn website chính thức.</li>
+                <li><b>Không xuyên tạc:</b> không chỉnh sửa số liệu, hình ảnh hoặc kết luận theo cách khiến người đọc hiểu sai mức độ hoàn thiện hay chứng nhận của hệ thống.</li>
+                <li><b>Tái lập thử nghiệm:</b> khi công bố kết quả, cần mô tả cấu hình thiết bị, phiên bản phần mềm, điều kiện tải, thời gian đo và sai số hoặc giới hạn đã biết.</li>
+                <li><b>Bảo mật:</b> không công khai mật khẩu Wi‑Fi, token, khóa API, dữ liệu định danh cá nhân hoặc thông tin có thể làm suy giảm an toàn hệ thống.</li>
+                <li><b>Thay đổi:</b> phiên bản phái sinh phải ghi rõ nội dung đã thay đổi và không được tự nhận là bản chính thức của nhóm EV_SAFE HUB.</li>
+                <li><b>Chấp thuận riêng:</b> mọi hoạt động thương mại, triển khai diện rộng hoặc chuyển giao thiết kế cần có văn bản đồng ý của nhóm tác giả và quy trình kiểm định phù hợp.</li>
+              </ol>
+            </div>
+          </details>
+
+          <div class="license-actions">
+            <a class="button button-primary" href="./LICENSE.md" target="_blank" rel="noopener">
+              Đọc LICENSE đầy đủ
+            </a>
+
+            <a class="button" href="./THIRD_PARTY_LICENSE.txt" target="_blank" rel="noopener">
+              Giấy phép thành phần bên thứ ba
+            </a>
+
+            <a class="button button-teal" href="mailto:nguyentantue2009@gmail.com?subject=Yêu%20cầu%20sử%20dụng%20EV_SAFE%20HUB">
+              Xin phép sử dụng mở rộng
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -3111,6 +4225,10 @@
             Video giới thiệu
           </a>
 
+          <a href="#giay-phep">
+            Giấy phép sử dụng
+          </a>
+
           <a
             href="https://github.com/nguyentantue2009-cloud/ev-safe-hub-2026/releases/latest/download/EV_SAFE_HUB_ANDROID.apk"
             download="EV_SAFE_HUB_ANDROID.apk"
@@ -3140,7 +4258,7 @@
         </span>
 
         <span>
-          Nguyên mẫu nghiên cứu và giáo dục.
+          Nguyên mẫu nghiên cứu – giáo dục • EVSH-RD-1.0
         </span>
       </div>
     </div>
@@ -3307,151 +4425,360 @@
         }
       );
 
-    const phoneViews = {
+    const scrollProgress =
+      document.getElementById("scrollProgress");
+
+    function updateScrollProgress() {
+      const scrollable =
+        document.documentElement.scrollHeight -
+        window.innerHeight;
+
+      const progress =
+        scrollable > 0
+          ? (window.scrollY / scrollable) * 100
+          : 0;
+
+      scrollProgress.style.width =
+        `${Math.min(100, Math.max(0, progress))}%`;
+    }
+
+    updateScrollProgress();
+
+    window.addEventListener(
+      "scroll",
+      updateScrollProgress,
+      { passive: true }
+    );
+
+    const appScreens = {
       overview: {
-        title:
-          "Tổng quan trạm",
-
-        content: `
-          <div class="phone-card">
-            <b>Trạm CBQ-01 — ONLINE</b>
-            <p>Sẵn sàng</p>
-          </div>
-
-          <div class="phone-row">
-            <div class="phone-card">
-              220.8 V
-            </div>
-
-            <div class="phone-card">
-              31.4°C
-            </div>
-          </div>
-
-          <div class="phone-main-button">
-            BẮT ĐẦU PHIÊN SẠC
-          </div>
-        `
+        image: "./assets/app/app-overview.jpg",
+        title: "Tổng quan vận hành theo thời gian thực",
+        description: "Màn hình trung tâm tổng hợp dung lượng pin ước tính, điện áp, dòng sạc, trạng thái phiên, trạm đang sử dụng và kết nối dữ liệu để người dùng nắm bắt toàn bộ hệ thống trong một lần nhìn.",
+        alt: "Màn hình Tổng quan ứng dụng EV SAFE HUB hiển thị dung lượng pin, điện áp, dòng sạc và trạng thái kết nối",
+        facts: [
+          ["Dung lượng pin", "Hiển thị trực quan theo phần trăm"],
+          ["Điện áp và dòng sạc", "Dữ liệu realtime từ trạm"],
+          ["Rủi ro pin", "Chỉ số sàng lọc BQS"],
+          ["Trạng thái kết nối", "MQTT / HTTP / WebSocket"]
+        ]
       },
 
-      session: {
-        title:
-          "Phiên sạc realtime",
-
-        content: `
-          <div class="phone-card">
-            <b>Đang sạc — 362 W</b>
-            <p>Điện năng 0.11 kWh</p>
-          </div>
-
-          <div class="phone-row">
-            <div class="phone-card">
-              1.67 A
-            </div>
-
-            <div class="phone-card">
-              32.1°C
-            </div>
-          </div>
-
-          <div class="phone-main-button">
-            KẾT THÚC PHIÊN
-          </div>
-        `
+      realtime: {
+        image: "./assets/app/app-realtime.jpg",
+        title: "Theo dõi dòng sạc, nhiệt độ và công suất",
+        description: "Các biểu đồ realtime tách riêng dòng điện, nhiệt độ, điện áp đầu vào và công suất sạc. Cách trình bày này giúp phát hiện nhanh dao động bất thường, xu hướng tăng nhiệt hoặc thay đổi tải trong suốt phiên sạc.",
+        alt: "Màn hình Theo dõi EV SAFE HUB với biểu đồ dòng sạc, nhiệt độ, điện áp và công suất",
+        facts: [
+          ["Dòng và nhiệt", "Đặt cạnh nhau để đối chiếu"],
+          ["Điện áp đầu vào", "Theo dõi ổn định nguồn AC"],
+          ["Công suất sạc", "Quan sát biến thiên theo thời gian"],
+          ["Kênh dữ liệu", "WebSocket, dự phòng HTTP"]
+        ]
       },
 
       battery: {
-        title:
-          "Xu hướng sức khỏe pin",
-
-        content: `
-          <div class="phone-card">
-            <b>BQS 74 / 100</b>
-            <p>Xu hướng ổn định</p>
-          </div>
-
-          <div class="phone-row">
-            <div class="phone-card">
-              SOH 86%
-            </div>
-
-            <div class="phone-card">
-              14 phiên
-            </div>
-          </div>
-
-          <div class="phone-main-button">
-            XEM PHÂN TÍCH
-          </div>
-        `
+        image: "./assets/app/app-battery.jpg",
+        title: "Phân tích BQS, SOH và khuyến nghị chăm sóc pin",
+        description: "Ứng dụng tổng hợp dữ liệu realtime với lịch sử phiên sạc để tạo chỉ số sàng lọc BQS, ước tính SOH tham khảo, nêu nguyên nhân ảnh hưởng và đưa ra khuyến nghị sử dụng pin có giải thích.",
+        alt: "Màn hình Pin EV SAFE HUB hiển thị BQS, SOH, nguyên nhân và khuyến nghị chăm sóc pin",
+        facts: [
+          ["BQS", "Điểm sàng lọc chất lượng phiên sạc"],
+          ["SOH ước tính", "Chỉ số tham khảo xu hướng"],
+          ["Nguyên nhân", "Quá nhiệt và phiên ngắt bất thường"],
+          ["Khuyến nghị", "Hướng dẫn chăm sóc có giải thích"]
+        ]
       },
 
-      alerts: {
-        title:
-          "Cảnh báo và lịch sử",
+      history: {
+        image: "./assets/app/app-history.jpg",
+        title: "Lịch sử phiên sạc và kết luận từ dữ liệu",
+        description: "Danh sách phiên sạc lưu thời gian, trạm, năng lượng, nhiệt độ tối đa, chi phí và BQS. Biểu đồ nhiệt độ cùng phần kết luận giúp chuyển dữ liệu lịch sử thành thông tin hỗ trợ quyết định.",
+        alt: "Màn hình Lịch sử EV SAFE HUB với biểu đồ nhiệt độ và danh sách phiên sạc",
+        facts: [
+          ["Nhật ký phiên", "Thời gian, trạm và năng lượng"],
+          ["Nhiệt độ tối đa", "Sàng lọc phiên có nguy cơ"],
+          ["BQS theo phiên", "So sánh chất lượng vận hành"],
+          ["Đồng bộ", "Lưu cục bộ và đồng bộ khi có mạng"]
+        ]
+      },
 
-        content: `
-          <div class="phone-card">
-            <b>Tải khu vực cao</b>
-            <p>
-              Hệ thống đã giảm giới hạn dòng
-            </p>
-          </div>
-
-          <div class="phone-main-button">
-            XEM LỊCH SỬ
-          </div>
-        `
+      stations: {
+        image: "./assets/app/app-stations.jpg",
+        title: "Trạm sạc nội bộ và cộng đồng trong một bản đồ vận hành",
+        description: "Người dùng có thể xem trạm gần vị trí, phân biệt trạm nội bộ với trạm cộng đồng, kiểm tra cổng trống, giá sạc, phương thức thanh toán, đặt chỗ và thanh toán bằng QR.",
+        alt: "Màn hình Trạm sạc EV SAFE HUB hiển thị trạm nội bộ, cộng đồng, cổng trống và thanh toán QR",
+        facts: [
+          ["Phân loại trạm", "Nội bộ và cộng đồng"],
+          ["Tình trạng cổng", "Số cổng trống theo thời gian"],
+          ["Đặt chỗ", "Giảm thời gian chờ"],
+          ["Thanh toán QR", "Quy trình rõ và thuận tiện"]
+        ]
       }
     };
 
+    const appScreenOrder =
+      Object.keys(appScreens);
+
+    const appPreviewImage =
+      document.getElementById("appPreviewImage");
+
+    const appShowcaseTitle =
+      document.getElementById("appShowcaseTitle");
+
+    const appShowcaseDescription =
+      document.getElementById("appShowcaseDescription");
+
+    const appShowcaseFacts =
+      document.getElementById("appShowcaseFacts");
+
+    const appCounterText =
+      document.getElementById("appCounterText");
+
+    const appProgressValue =
+      document.getElementById("appProgressValue");
+
+    const appDevice =
+      document.getElementById("appDevice");
+
+    const appPanel =
+      document.getElementById("appShowcasePanel");
+
+    let activeAppScreen = "overview";
+    let appAutoplayTimer = null;
+    let pointerStartX = null;
+
+    function renderAppFacts(facts) {
+      appShowcaseFacts.innerHTML =
+        facts
+          .map(
+            ([title, detail]) => `
+              <div class="app-fact">
+                <b>${title}</b>
+                <span>${detail}</span>
+              </div>
+            `
+          )
+          .join("");
+    }
+
+    function setAppScreen(key, options = {}) {
+      const screen = appScreens[key];
+
+      if (!screen) {
+        return;
+      }
+
+      activeAppScreen = key;
+
+      document
+        .querySelectorAll("[data-app-screen]")
+        .forEach((control) => {
+          const isActive =
+            control.dataset.appScreen === key;
+
+          control.classList.toggle("active", isActive);
+
+          if (control.getAttribute("role") === "tab") {
+            control.setAttribute(
+              "aria-selected",
+              isActive ? "true" : "false"
+            );
+          }
+        });
+
+      appPreviewImage.classList.add("switching");
+
+      window.setTimeout(() => {
+        appPreviewImage.src = screen.image;
+        appPreviewImage.alt = screen.alt;
+        appPreviewImage.classList.remove("switching");
+      }, 150);
+
+      appShowcaseTitle.textContent = screen.title;
+      appShowcaseDescription.textContent = screen.description;
+      renderAppFacts(screen.facts);
+
+      const index =
+        appScreenOrder.indexOf(key);
+
+      appCounterText.textContent =
+        `${String(index + 1).padStart(2, "0")} / ${String(appScreenOrder.length).padStart(2, "0")}`;
+
+      appProgressValue.style.width =
+        `${((index + 1) / appScreenOrder.length) * 100}%`;
+
+      appDevice.setAttribute(
+        "aria-label",
+        `Bản xem trước ${screen.title}`
+      );
+
+      if (!options.keepAutoplay) {
+        restartAppAutoplay();
+      }
+    }
+
+    function showRelativeAppScreen(direction) {
+      const currentIndex =
+        appScreenOrder.indexOf(activeAppScreen);
+
+      const nextIndex =
+        (currentIndex + direction + appScreenOrder.length) %
+        appScreenOrder.length;
+
+      setAppScreen(
+        appScreenOrder[nextIndex],
+        { keepAutoplay: true }
+      );
+    }
+
+    function stopAppAutoplay() {
+      window.clearInterval(appAutoplayTimer);
+      appAutoplayTimer = null;
+    }
+
+    function startAppAutoplay() {
+      if (
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        document.hidden
+      ) {
+        return;
+      }
+
+      stopAppAutoplay();
+
+      appAutoplayTimer = window.setInterval(
+        () => showRelativeAppScreen(1),
+        6200
+      );
+    }
+
+    function restartAppAutoplay() {
+      stopAppAutoplay();
+      startAppAutoplay();
+    }
+
     document
-      .querySelectorAll(
-        ".screen-button"
-      )
-      .forEach(
-        (button) => {
-          button.addEventListener(
-            "click",
-            () => {
-              document
-                .querySelectorAll(
-                  ".screen-button"
-                )
-                .forEach(
-                  (item) => {
-                    item.classList.remove(
-                      "active"
-                    );
-                  }
-                );
+      .querySelectorAll("[data-app-screen]")
+      .forEach((control) => {
+        control.addEventListener("click", () => {
+          setAppScreen(control.dataset.appScreen);
+        });
+      });
 
-              button.classList.add(
-                "active"
-              );
+    [appDevice, appPanel].forEach((element) => {
+      element.addEventListener("mouseenter", stopAppAutoplay);
+      element.addEventListener("mouseleave", startAppAutoplay);
+      element.addEventListener("focusin", stopAppAutoplay);
+      element.addEventListener("focusout", startAppAutoplay);
+    });
 
-              const view =
-                phoneViews[
-                  button.dataset.screen
-                ];
+    appDevice.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowRight") {
+        showRelativeAppScreen(1);
+      }
 
-              document
-                .getElementById(
-                  "phoneTitle"
-                )
-                .textContent =
-                  view.title;
+      if (event.key === "ArrowLeft") {
+        showRelativeAppScreen(-1);
+      }
+    });
 
-              document
-                .getElementById(
-                  "phoneBody"
-                )
-                .innerHTML =
-                  view.content;
-            }
-          );
+    appDevice.addEventListener("pointerdown", (event) => {
+      pointerStartX = event.clientX;
+    });
+
+    appDevice.addEventListener("pointerup", (event) => {
+      if (pointerStartX === null) {
+        return;
+      }
+
+      const distance =
+        event.clientX - pointerStartX;
+
+      pointerStartX = null;
+
+      if (Math.abs(distance) < 45) {
+        return;
+      }
+
+      showRelativeAppScreen(distance < 0 ? 1 : -1);
+      restartAppAutoplay();
+    });
+
+    appDevice.addEventListener("pointercancel", () => {
+      pointerStartX = null;
+    });
+
+    appDevice.addEventListener("pointermove", (event) => {
+      if (
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches ||
+        window.innerWidth < 900
+      ) {
+        return;
+      }
+
+      const rect = appDevice.getBoundingClientRect();
+      const x = (event.clientX - rect.left) / rect.width - 0.5;
+      const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+      appDevice.style.transform =
+        `perspective(1200px) rotateY(${x * 5}deg) rotateX(${-y * 4}deg)`;
+    });
+
+    appDevice.addEventListener("pointerleave", () => {
+      appDevice.style.transform =
+        "perspective(1200px) rotateY(0deg) rotateX(0deg)";
+    });
+
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) {
+        stopAppAutoplay();
+      } else {
+        startAppAutoplay();
+      }
+    });
+
+    appPreviewImage.addEventListener("error", () => {
+      appPreviewImage.alt =
+        "Không tải được ảnh giao diện. Hãy kiểm tra thư mục assets/app trong repository.";
+    });
+
+    setAppScreen("overview", { keepAutoplay: true });
+    startAppAutoplay();
+
+    const navSections =
+      [...document.querySelectorAll("main section[id]")];
+
+    const navLinks =
+      [...mainNav.querySelectorAll('a[href^="#"]')];
+
+    const navObserver =
+      new IntersectionObserver(
+        (entries) => {
+          const visible = entries
+            .filter((entry) => entry.isIntersecting)
+            .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+          if (!visible) {
+            return;
+          }
+
+          navLinks.forEach((link) => {
+            link.classList.toggle(
+              "active",
+              link.getAttribute("href") === `#${visible.target.id}`
+            );
+          });
+        },
+        {
+          rootMargin: "-30% 0px -55% 0px",
+          threshold: [0.05, 0.2, 0.5]
         }
       );
+
+    navSections.forEach((section) => {
+      navObserver.observe(section);
+    });
   </script>
 </body>
 </html>
