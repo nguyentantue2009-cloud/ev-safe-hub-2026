@@ -1,0 +1,9 @@
+PDF.js / pdfjs-dist
+Copyright Mozilla and PDF.js contributors
+License: Apache License 2.0
+Official project: https://github.com/mozilla/pdf.js
+Package version used by this viewer: 6.1.200
+CDN: https://cdn.jsdelivr.net/npm/pdfjs-dist@6.1.200/
+
+The complete Apache License 2.0 text is available at:
+https://www.apache.org/licenses/LICENSE-2.0
