@@ -1,0 +1,3457 @@
+<!doctype html>
+<html lang="vi" data-theme="light">
+<head>
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width,initial-scale=1,viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#f4f8fc">
+
+  <meta
+    name="description"
+    content="EV_SAFE HUB — Hệ thống trạm sạc xe điện thông minh, giám sát an toàn, cân bằng tải và theo dõi xu hướng sức khỏe pin."
+  >
+
+  <meta property="og:title" content="EV_SAFE HUB">
+
+  <meta
+    property="og:description"
+    content="Sạc an toàn hơn. Quản lý thông minh hơn."
+  >
+
+  <meta property="og:type" content="website">
+
+  <title>
+    EV_SAFE HUB — Trạm sạc xe điện thông minh
+  </title>
+
+  <link rel="canonical" href="https://nguyentantue2009-cloud.github.io/ev-safe-hub-2026/">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="manifest" href="./site.webmanifest">
+  <meta property="og:url" content="https://nguyentantue2009-cloud.github.io/ev-safe-hub-2026/">
+  <meta property="og:image" content="https://nguyentantue2009-cloud.github.io/ev-safe-hub-2026/assets/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <script>
+    (() => {
+      const savedTheme =
+        localStorage.getItem("evsh-theme");
+
+      const systemTheme =
+        window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches
+          ? "dark"
+          : "light";
+
+      document.documentElement.dataset.theme =
+        savedTheme || systemTheme;
+    })();
+  </script>
+
+  <style>
+    :root {
+      color-scheme: light;
+
+      --bg: #f4f8fc;
+      --bg-soft: #edf4fa;
+
+      --surface: rgba(255, 255, 255, 0.9);
+      --surface-solid: #ffffff;
+
+      --text: #0d2238;
+      --muted: #5d7085;
+      --subtle: #8495a7;
+
+      --line: rgba(19, 55, 88, 0.13);
+
+      --primary: #0875df;
+      --primary-dark: #0758b6;
+      --primary-soft: #e2f1ff;
+
+      --teal: #078f7d;
+      --teal-soft: #def7f1;
+
+      --shadow:
+        0 28px 80px rgba(28, 62, 94, 0.14);
+
+      --shadow-small:
+        0 12px 34px rgba(28, 62, 94, 0.09);
+
+      --radius: 24px;
+      --radius-large: 34px;
+
+      --container: 1200px;
+      --header-height: 76px;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+
+      --bg: #07111e;
+      --bg-soft: #0a1727;
+
+      --surface: rgba(13, 29, 47, 0.9);
+      --surface-solid: #0d1d2f;
+
+      --text: #edf6ff;
+      --muted: #a7bacd;
+      --subtle: #748aa0;
+
+      --line: rgba(178, 211, 241, 0.14);
+
+      --primary: #65adff;
+      --primary-dark: #8fc7ff;
+      --primary-soft: rgba(62, 143, 235, 0.17);
+
+      --teal: #59dcc5;
+      --teal-soft: rgba(47, 194, 168, 0.15);
+
+      --shadow:
+        0 30px 84px rgba(0, 0, 0, 0.38);
+
+      --shadow-small:
+        0 12px 34px rgba(0, 0, 0, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+
+      scroll-padding-top:
+        calc(var(--header-height) + 12px);
+    }
+
+    body {
+      margin: 0;
+      min-width: 320px;
+      overflow-x: hidden;
+
+      color: var(--text);
+
+      background:
+        radial-gradient(
+          circle at 10% 5%,
+          rgba(44, 144, 238, 0.12),
+          transparent 30rem
+        ),
+        radial-gradient(
+          circle at 90% 15%,
+          rgba(35, 191, 163, 0.09),
+          transparent 28rem
+        ),
+        var(--bg);
+
+      font-family:
+        Inter,
+        system-ui,
+        -apple-system,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+      line-height: 1.65;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    img,
+    video,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      line-height: 1.12;
+      letter-spacing: -0.035em;
+    }
+
+    p {
+      color: var(--muted);
+    }
+
+    h1 {
+      margin: 0 0 24px;
+
+      font-size:
+        clamp(
+          3rem,
+          7vw,
+          6.7rem
+        );
+    }
+
+    h2 {
+      margin: 0 0 18px;
+
+      font-size:
+        clamp(
+          2.2rem,
+          4.7vw,
+          4.5rem
+        );
+    }
+
+    h3 {
+      margin: 0 0 10px;
+
+      font-size:
+        clamp(
+          1.25rem,
+          2vw,
+          1.7rem
+        );
+    }
+
+    .container {
+      width:
+        min(
+          var(--container),
+          calc(100% - 40px)
+        );
+
+      margin-inline: auto;
+    }
+
+    .section {
+      padding:
+        clamp(
+          78px,
+          9vw,
+          130px
+        )
+        0;
+    }
+
+    .section-soft {
+      border-block:
+        1px solid var(--line);
+
+      background:
+        var(--bg-soft);
+    }
+
+    .section-dark {
+      color: #edf7ff;
+
+      background:
+        radial-gradient(
+          circle at 15% 10%,
+          rgba(66, 160, 255, 0.19),
+          transparent 31rem
+        ),
+        radial-gradient(
+          circle at 88% 80%,
+          rgba(45, 216, 178, 0.13),
+          transparent 28rem
+        ),
+        #071323;
+    }
+
+    .section-dark p {
+      color: #a9bfd2;
+    }
+
+    /* ================= HEADER ================= */
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 500;
+
+      border-bottom:
+        1px solid transparent;
+
+      transition:
+        0.25s ease;
+    }
+
+    .site-header.scrolled {
+      border-color:
+        var(--line);
+
+      background:
+        rgba(246, 250, 254, 0.9);
+
+      backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.05);
+    }
+
+    html[data-theme="dark"]
+    .site-header.scrolled {
+      background:
+        rgba(7, 17, 30, 0.9);
+    }
+
+    .header-inner {
+      min-height:
+        var(--header-height);
+
+      display: flex;
+      align-items: center;
+
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+
+      white-space: nowrap;
+    }
+
+    .brand-mark {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          145deg,
+          #0875df,
+          #16ae99
+        );
+
+      box-shadow:
+        0 12px 30px rgba(8, 117, 223, 0.25);
+
+      font-weight: 950;
+    }
+
+    .brand strong {
+      display: block;
+
+      letter-spacing: 0.08em;
+    }
+
+    .brand small {
+      display: block;
+
+      color: var(--subtle);
+
+      font-size: 9px;
+      letter-spacing: 0.13em;
+
+      text-transform:
+        uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+
+      gap: 4px;
+
+      margin-left: auto;
+    }
+
+    .main-nav a {
+      padding:
+        10px 11px;
+
+      border-radius: 11px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .main-nav a:hover,
+    .main-nav a.active {
+      color: var(--text);
+
+      background:
+        var(--surface);
+    }
+
+    .header-actions {
+      display: flex;
+
+      gap: 8px;
+    }
+
+    .icon-button,
+    .menu-button {
+      width: 43px;
+      height: 43px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 13px;
+
+      color: var(--text);
+
+      background:
+        var(--surface);
+
+      cursor: pointer;
+    }
+
+    .menu-button {
+      display: none;
+    }
+
+    /* ================= THÀNH PHẦN CHUNG ================= */
+
+    .button {
+      min-height: 51px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      padding:
+        0 20px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 15px;
+
+      color: var(--text);
+
+      background:
+        var(--surface);
+
+      font-weight: 850;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .button:hover {
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        var(--shadow-small);
+    }
+
+    .button-primary {
+      color: white;
+
+      border-color:
+        transparent;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0875df,
+          #0758b6
+        );
+    }
+
+    .button-teal {
+      color: white;
+
+      border-color:
+        transparent;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0a9c88,
+          #057766
+        );
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+
+      gap: 9px;
+
+      margin-bottom: 16px;
+
+      color: var(--primary);
+
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+
+      text-transform:
+        uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+
+      width: 29px;
+      height: 2px;
+
+      background:
+        currentColor;
+    }
+
+    .section-heading {
+      display: grid;
+
+      grid-template-columns:
+        1.1fr 0.7fr;
+
+      gap: 40px;
+
+      align-items: end;
+
+      margin-bottom: 44px;
+    }
+
+    .section-heading.center {
+      display: block;
+
+      max-width: 850px;
+
+      margin:
+        0 auto 45px;
+
+      text-align: center;
+    }
+
+    .card {
+      padding: 26px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius);
+
+      background:
+        var(--surface);
+
+      box-shadow:
+        var(--shadow-small);
+    }
+
+    /* ================= HERO ================= */
+
+    .hero {
+      min-height: 100svh;
+
+      display: grid;
+      align-items: center;
+
+      padding:
+        125px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+
+      grid-template-columns:
+        1.05fr 0.95fr;
+
+      gap: 70px;
+
+      align-items: center;
+    }
+
+    .hero h1 span {
+      display: block;
+
+      color: var(--primary);
+    }
+
+    .hero-description {
+      font-size:
+        clamp(
+          1.05rem,
+          1.6vw,
+          1.25rem
+        );
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap: 12px;
+    }
+
+    .hero-facts {
+      display: flex;
+      flex-wrap: wrap;
+
+      gap:
+        10px 20px;
+
+      margin-top: 25px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .hero-facts span::before {
+      content: "";
+
+      width: 7px;
+      height: 7px;
+
+      display: inline-block;
+
+      margin-right: 8px;
+
+      border-radius: 50%;
+
+      background:
+        var(--teal);
+
+      box-shadow:
+        0 0 0 5px var(--teal-soft);
+    }
+
+    .station-frame {
+      min-height: 550px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius-large);
+
+      background:
+        var(--surface);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+    .station-product {
+      width: 72%;
+
+      padding: 24px;
+
+      border-radius: 30px;
+
+      color: #eef8ff;
+
+      background:
+        linear-gradient(
+          155deg,
+          #102a47,
+          #071525
+        );
+
+      box-shadow:
+        0 30px 70px rgba(3, 16, 30, 0.37);
+    }
+
+    .station-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 18px;
+    }
+
+    .station-name {
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .online-status {
+      color: #89f1be;
+
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .station-screen {
+      padding: 20px;
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          155deg,
+          rgba(3, 14, 27, 0.92),
+          rgba(7, 36, 48, 0.72)
+        );
+    }
+
+    .station-screen strong {
+      display: block;
+
+      margin:
+        5px 0 17px;
+
+      font-size: 29px;
+    }
+
+    .station-metrics {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 9px;
+    }
+
+    .station-metric {
+      padding: 12px;
+
+      border-radius: 13px;
+
+      background:
+        rgba(255, 255, 255, 0.05);
+    }
+
+    .station-metric span {
+      display: block;
+
+      color: #7f9bb4;
+
+      font-size: 9px;
+    }
+
+    .station-metric b {
+      font-size: 14px;
+    }
+
+    /* ================= GIÁ TRỊ ================= */
+
+    .trust-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+    }
+
+    .trust-item {
+      padding: 25px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        var(--surface);
+    }
+
+    .trust-item b {
+      display: block;
+
+      font-size: 18px;
+    }
+
+    .trust-item span {
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    /* ================= GRID ================= */
+
+    .solution-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 16px;
+    }
+
+    .solution-card {
+      min-height: 300px;
+    }
+
+    .solution-icon {
+      height: 120px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 20px;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--primary-soft),
+          var(--teal-soft)
+        );
+
+      font-size: 42px;
+    }
+
+    .product-grid,
+    .application-grid,
+    .download-shell,
+    .contact-shell {
+      display: grid;
+
+      grid-template-columns:
+        0.9fr 1.1fr;
+
+      gap: 36px;
+
+      align-items: center;
+    }
+
+    .product-visual {
+      min-height: 500px;
+
+      display: grid;
+      place-items: center;
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius-large);
+
+      background:
+        var(--surface);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+    .cabinet {
+      width:
+        min(
+          355px,
+          78vw
+        );
+
+      padding: 24px;
+
+      border-radius: 28px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          150deg,
+          #152e49,
+          #071321
+        );
+    }
+
+    .cabinet-screen {
+      height: 170px;
+
+      margin:
+        20px 0;
+
+      border-radius: 18px;
+
+      background:
+        #071b2b;
+    }
+
+    .cabinet-modules {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 10px;
+    }
+
+    .cabinet-modules div {
+      padding: 15px;
+
+      border-radius: 13px;
+
+      color: #a7c1d6;
+
+      background:
+        rgba(255, 255, 255, 0.05);
+
+      text-align: center;
+
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .feature-list {
+      display: grid;
+
+      gap: 12px;
+
+      margin-top: 25px;
+    }
+
+    .feature-item {
+      display: grid;
+
+      grid-template-columns:
+        42px 1fr;
+
+      gap: 14px;
+
+      padding: 17px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 16px;
+
+      background:
+        var(--surface);
+    }
+
+    .feature-item i {
+      width: 39px;
+      height: 39px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 12px;
+
+      color: var(--teal);
+
+      background:
+        var(--teal-soft);
+
+      font-style: normal;
+      font-weight: 900;
+    }
+
+    /* ================= QUY TRÌNH ================= */
+
+    .process-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(5, 1fr);
+
+      gap: 13px;
+    }
+
+    .process-step {
+      min-height: 230px;
+    }
+
+    .process-number {
+      width: 45px;
+      height: 45px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 20px;
+
+      border-radius: 14px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          var(--teal)
+        );
+
+      font-weight: 900;
+    }
+
+    /* ================= CÔNG NGHỆ ================= */
+
+    .technology-grid,
+    .team-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, 1fr);
+
+      gap: 15px;
+    }
+
+    /* ================= ỨNG DỤNG ================= */
+
+    .phone-stage {
+      min-height: 600px;
+
+      display: grid;
+      place-items: center;
+    }
+
+    .phone {
+      width:
+        min(
+          315px,
+          74vw
+        );
+
+      padding: 9px;
+
+      border-radius: 42px;
+
+      background:
+        #0a1420;
+
+      box-shadow:
+        var(--shadow);
+    }
+
+    .phone-screen {
+      min-height: 560px;
+
+      overflow: hidden;
+
+      border-radius: 34px;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          180deg,
+          #071a2b,
+          #0d2b45
+        );
+    }
+
+    .phone-heading {
+      padding:
+        22px 18px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #0b6ed1,
+          #0b9582
+        );
+    }
+
+    .phone-body {
+      padding: 15px;
+    }
+
+    .phone-card {
+      padding: 15px;
+
+      margin-bottom: 11px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255, 255, 255, 0.055);
+    }
+
+    .phone-row {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 9px;
+    }
+
+    .phone-main-button {
+      margin-top: 13px;
+
+      padding: 13px;
+
+      border-radius: 13px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #2f98f0,
+          #2ac5aa
+        );
+
+      text-align: center;
+
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .screen-selector {
+      display: grid;
+
+      gap: 9px;
+
+      margin-top: 25px;
+    }
+
+    .screen-button {
+      width: 100%;
+
+      padding:
+        16px 17px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 15px;
+
+      color: var(--text);
+
+      background:
+        transparent;
+
+      text-align: left;
+
+      cursor: pointer;
+    }
+
+    .screen-button.active,
+    .screen-button:hover {
+      border-color:
+        var(--primary);
+
+      background:
+        var(--primary-soft);
+    }
+
+    /* ================= BÀI THUYẾT TRÌNH PDF ================= */
+
+    .pdf-wrapper {
+      width:
+        min(
+          100%,
+          1120px
+        );
+
+      margin-inline: auto;
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 26px;
+
+      background: #ffffff;
+
+      box-shadow:
+        var(--shadow);
+    }
+
+    .pdf-wrapper iframe {
+      width: 100%;
+      height: min(78vh, 850px);
+      min-height: 560px;
+
+      display: block;
+
+      border: 0;
+
+      background: #ffffff;
+    }
+
+    .pdf-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      gap: 12px;
+
+      margin-top: 18px;
+    }
+
+    .viewer-note {
+      max-width: 850px;
+
+      margin:
+        14px auto 0;
+
+      text-align: center;
+      font-size: 13px;
+    }
+
+    /* ================= VIDEO ================= */
+
+    .video-wrapper {
+      width:
+        min(
+          100%,
+          1050px
+        );
+
+      margin-inline: auto;
+
+      overflow: hidden;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.13);
+
+      border-radius: 26px;
+
+      background:
+        #000000;
+
+      box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.4);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      height: auto;
+
+      aspect-ratio:
+        16 / 9;
+
+      background:
+        #000000;
+    }
+
+    .video-actions {
+      display: flex;
+      justify-content: center;
+
+      margin-top: 18px;
+    }
+
+    /* ================= TÀI LIỆU ================= */
+
+    .download-shell {
+      padding:
+        clamp(
+          30px,
+          5vw,
+          58px
+        );
+
+      border:
+        1px solid var(--line);
+
+      border-radius:
+        var(--radius-large);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(8, 117, 223, 0.13),
+          rgba(6, 143, 124, 0.09)
+        ),
+        var(--surface);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+    .download-list {
+      display: grid;
+
+      gap: 10px;
+    }
+
+    .download-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 18px;
+
+      padding: 16px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 15px;
+
+      background:
+        var(--surface);
+    }
+
+    .download-information {
+      display: flex;
+      align-items: center;
+
+      gap: 12px;
+    }
+
+    .download-icon {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+      place-items: center;
+
+      flex: 0 0 auto;
+
+      border-radius: 12px;
+
+      color: var(--primary);
+
+      background:
+        var(--primary-soft);
+
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .download-information b,
+    .download-information small {
+      display: block;
+    }
+
+    .download-information small {
+      color: var(--muted);
+    }
+
+    .download-action {
+      color: var(--primary);
+
+      font-size: 13px;
+      font-weight: 900;
+
+      white-space: nowrap;
+    }
+
+    /* ================= CÀI APK ================= */
+
+    .installation-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(4, 1fr);
+
+      gap: 15px;
+    }
+
+    .installation-card {
+      overflow: hidden;
+
+      padding: 0;
+    }
+
+    .installation-image {
+      height: 210px;
+
+      display: grid;
+      place-items: center;
+
+      background:
+        linear-gradient(
+          145deg,
+          var(--primary-soft),
+          var(--teal-soft)
+        );
+    }
+
+    .mini-phone {
+      width: 110px;
+      height: 190px;
+
+      display: grid;
+      place-items: center;
+
+      padding: 12px;
+
+      border:
+        5px solid #0a1724;
+
+      border-radius: 22px;
+
+      color: #0b8c6a;
+
+      background:
+        #f5f9fd;
+
+      font-size: 12px;
+      font-weight: 900;
+
+      text-align: center;
+    }
+
+    .installation-body {
+      padding: 20px;
+    }
+
+    .apk-help {
+      margin-top: 24px;
+
+      padding: 22px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 20px;
+
+      background:
+        var(--surface);
+    }
+
+    .apk-help code {
+      color: var(--primary);
+
+      word-break: break-all;
+    }
+
+    /* ================= FAQ ================= */
+
+    .faq-list {
+      display: grid;
+
+      gap: 10px;
+    }
+
+    .faq-item {
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 17px;
+
+      background:
+        var(--surface);
+    }
+
+    .faq-question {
+      width: 100%;
+
+      display: flex;
+      justify-content: space-between;
+
+      padding:
+        18px 20px;
+
+      border: 0;
+
+      color: var(--text);
+
+      background:
+        transparent;
+
+      text-align: left;
+
+      font-weight: 850;
+
+      cursor: pointer;
+    }
+
+    .faq-answer {
+      max-height: 0;
+
+      overflow: hidden;
+
+      transition:
+        max-height 0.3s ease;
+    }
+
+    .faq-answer p {
+      margin: 0;
+
+      padding:
+        0 20px 20px;
+    }
+
+    .faq-item.open
+    .faq-answer {
+      max-height: 280px;
+    }
+
+    /* ================= LIÊN HỆ ================= */
+
+    .contact-shell {
+      padding:
+        clamp(
+          32px,
+          6vw,
+          68px
+        );
+
+      border-radius:
+        var(--radius-large);
+
+      color: white;
+
+      background:
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(75, 216, 186, 0.22),
+          transparent 28rem
+        ),
+        linear-gradient(
+          135deg,
+          #08254a,
+          #06382f
+        );
+    }
+
+    .contact-shell p {
+      color: #b5cad9;
+    }
+
+    .contact-list {
+      display: grid;
+
+      gap: 11px;
+    }
+
+    .contact-item {
+      padding: 15px;
+
+      border:
+        1px solid rgba(255, 255, 255, 0.12);
+
+      border-radius: 15px;
+
+      background:
+        rgba(255, 255, 255, 0.06);
+    }
+
+    /* ================= FOOTER ================= */
+
+    .footer {
+      padding:
+        60px 0 25px;
+
+      border-top:
+        1px solid var(--line);
+
+      background:
+        var(--surface);
+    }
+
+    .footer-grid {
+      display: grid;
+
+      grid-template-columns:
+        1.5fr repeat(3, 1fr);
+
+      gap: 35px;
+    }
+
+    .footer a:not(.brand) {
+      display: block;
+
+      margin:
+        8px 0;
+
+      color: var(--muted);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+
+      gap: 20px;
+
+      margin-top: 40px;
+
+      padding-top: 20px;
+
+      border-top:
+        1px solid var(--line);
+
+      color: var(--muted);
+
+      font-size: 12px;
+    }
+
+    .back-top {
+      position: fixed;
+
+      right: 18px;
+      bottom: 18px;
+      z-index: 700;
+
+      width: 50px;
+      height: 50px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 16px;
+
+      color: white;
+
+      background:
+        var(--primary);
+
+      opacity: 0;
+
+      pointer-events: none;
+    }
+
+    .back-top.show {
+      opacity: 1;
+
+      pointer-events: auto;
+    }
+
+    .reveal {
+      opacity: 0;
+
+      transform:
+        translateY(20px);
+
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+
+      transform: none;
+    }
+
+    /* ================= RESPONSIVE ================= */
+
+    @media (max-width: 1050px) {
+      .main-nav {
+        position: fixed;
+
+        top: 70px;
+        right: 20px;
+        left: 20px;
+
+        display: none;
+
+        padding: 10px;
+
+        border:
+          1px solid var(--line);
+
+        border-radius: 18px;
+
+        background:
+          var(--surface-solid);
+
+        box-shadow:
+          var(--shadow);
+      }
+
+      .main-nav.open {
+        display: grid;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .hero-grid,
+      .product-grid,
+      .application-grid,
+      .download-shell,
+      .contact-shell,
+      .section-heading {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        text-align: center;
+      }
+
+      .hero-actions,
+      .hero-facts {
+        justify-content: center;
+      }
+
+      .solution-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .process-grid {
+        grid-template-columns:
+          repeat(3, 1fr);
+      }
+
+      .installation-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns:
+          1.5fr 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        width:
+          min(
+            var(--container),
+            calc(100% - 28px)
+          );
+      }
+
+      .brand small {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 105px;
+      }
+
+      .hero-actions
+      .button {
+        width: 100%;
+      }
+
+      .solution-grid,
+      .process-grid,
+      .technology-grid,
+      .installation-grid,
+      .team-grid,
+      .trust-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+      }
+
+      .download-item {
+        align-items: flex-start;
+      }
+
+      .pdf-wrapper iframe {
+        height: 72vh;
+        min-height: 460px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header
+    class="site-header"
+    id="siteHeader"
+  >
+    <div class="container header-inner">
+      <a
+        class="brand"
+        href="#top"
+      >
+        <span class="brand-mark">
+          EV
+        </span>
+
+        <span>
+          <strong>
+            EV_SAFE HUB
+          </strong>
+
+          <small>
+            Smart charging & safety platform
+          </small>
+        </span>
+      </a>
+
+      <nav
+        class="main-nav"
+        id="mainNav"
+      >
+        <a href="#top">
+          Trang chủ
+        </a>
+
+        <a href="#giai-phap">
+          Giải pháp
+        </a>
+
+        <a href="#san-pham">
+          Sản phẩm
+        </a>
+
+        <a href="#cong-nghe">
+          Công nghệ
+        </a>
+
+        <a href="#ung-dung">
+          Ứng dụng
+        </a>
+
+        <a href="#bai-thuyet-trinh">
+          Thuyết trình
+        </a>
+
+        <a href="#video-gioi-thieu">
+          Video
+        </a>
+
+        <a href="#tai-xuong">
+          Hồ sơ
+        </a>
+
+        <a href="#lien-he">
+          Liên hệ
+        </a>
+      </nav>
+
+      <div class="header-actions">
+        <button
+          class="icon-button"
+          id="themeToggle"
+          type="button"
+          aria-label="Chuyển chế độ sáng tối"
+        >
+          ◐
+        </button>
+
+        <button
+          class="menu-button"
+          id="menuButton"
+          type="button"
+          aria-label="Mở menu"
+        >
+          ☰
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- PHẦN ĐẦU -->
+
+    <section
+      class="hero"
+      id="top"
+    >
+      <div class="container hero-grid">
+        <div class="hero-copy reveal">
+          <div class="eyebrow">
+            Hồ sơ dự thi chính thức năm 2026
+          </div>
+
+          <h1>
+            Sạc an toàn.
+
+            <span>
+              Quản lý thông minh.
+            </span>
+          </h1>
+
+          <p class="hero-description">
+            EV_SAFE HUB là hệ thống trạm sạc xe điện
+            thông minh đa trạm, tích hợp giám sát điện
+            năng, cảnh báo an toàn, đánh giá xu hướng
+            sức khỏe pin, cân bằng tải và ứng dụng
+            Flutter.
+          </p>
+
+          <div class="hero-actions">
+            <!-- CUỘN ĐẾN TRÌNH XEM PDF -->
+
+            <a
+              class="button button-primary"
+              href="#bai-thuyet-trinh"
+            >
+              📄 Xem bài thuyết trình
+            </a>
+
+            <!-- CUỘN ĐẾN TRÌNH PHÁT VIDEO -->
+
+            <a
+              class="button"
+              href="#video-gioi-thieu"
+            >
+              ▶ Xem video trực tiếp
+            </a>
+
+            <!-- TẢI APK TRỰC TIẾP -->
+
+            <a
+              class="button button-teal"
+              href="https://github.com/nguyentantue2009-cloud/ev-safe-hub-2026/releases/latest/download/EV_SAFE_HUB_ANDROID.apk"
+              download="EV_SAFE_HUB_ANDROID.apk"
+            >
+              ↓ Tải ứng dụng Android
+            </a>
+          </div>
+
+          <div class="hero-facts">
+            <span>
+              ESP32 công nghiệp + Arduino Mega
+            </span>
+
+            <span>
+              HTTP + WebSocket realtime
+            </span>
+
+            <span>
+              Local-first, có AP dự phòng
+            </span>
+          </div>
+        </div>
+
+        <div class="station-frame reveal">
+          <div class="station-product">
+            <div class="station-top">
+              <span class="station-name">
+                EV_SAFE HUB
+              </span>
+
+              <span class="online-status">
+                ONLINE
+              </span>
+            </div>
+
+            <div class="station-screen">
+              <small>
+                TRẠNG THÁI PHIÊN SẠC
+              </small>
+
+              <strong>
+                SẴN SÀNG
+              </strong>
+
+              <div class="station-metrics">
+                <div class="station-metric">
+                  <span>Điện áp</span>
+                  <b>220.8 V</b>
+                </div>
+
+                <div class="station-metric">
+                  <span>Dòng điện</span>
+                  <b>1.67 A</b>
+                </div>
+
+                <div class="station-metric">
+                  <span>Nhiệt độ</span>
+                  <b>31.4°C</b>
+                </div>
+
+                <div class="station-metric">
+                  <span>Chất lượng pin</span>
+                  <b>BQS 74</b>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GIÁ TRỊ NỔI BẬT -->
+
+    <section class="section-soft">
+      <div class="container trust-grid">
+        <div class="trust-item">
+          <b>
+            Giám sát realtime
+          </b>
+
+          <span>
+            Điện năng, nhiệt độ và trạng thái phiên
+          </span>
+        </div>
+
+        <div class="trust-item">
+          <b>
+            Bảo vệ nhiều lớp
+          </b>
+
+          <span>
+            Cảnh báo và ngắt contactor
+          </span>
+        </div>
+
+        <div class="trust-item">
+          <b>
+            Local-first
+          </b>
+
+          <span>
+            Hoạt động trong mạng nội bộ
+          </span>
+        </div>
+
+        <div class="trust-item">
+          <b>
+            Kiến trúc mô-đun
+          </b>
+
+          <span>
+            Dễ bảo trì và mở rộng đa trạm
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- GIẢI PHÁP -->
+
+    <section
+      class="section"
+      id="giai-phap"
+    >
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">
+              Giải pháp triển khai
+            </div>
+
+            <h2>
+              Một nền tảng, nhiều mô hình vận hành.
+            </h2>
+          </div>
+
+          <p>
+            Phù hợp cho trường học, chung cư, khu dân
+            cư và bãi giữ xe cần quản lý tập trung và
+            kiểm soát an toàn.
+          </p>
+        </div>
+
+        <div class="solution-grid">
+          <article class="card solution-card reveal">
+            <div class="solution-icon">
+              🏫
+            </div>
+
+            <h3>
+              Trường học
+            </h3>
+
+            <p>
+              Quản lý điểm sạc xe điện học sinh,
+              giám sát nhiệt và cảnh báo tại khu vực
+              gửi xe.
+            </p>
+          </article>
+
+          <article class="card solution-card reveal">
+            <div class="solution-icon">
+              🏢
+            </div>
+
+            <h3>
+              Chung cư
+            </h3>
+
+            <p>
+              Phân bổ tải theo khu vực, ghi nhận
+              phiên sạc và giảm nguy cơ quá tải.
+            </p>
+          </article>
+
+          <article class="card solution-card reveal">
+            <div class="solution-icon">
+              🏘️
+            </div>
+
+            <h3>
+              Khu dân cư
+            </h3>
+
+            <p>
+              Tổ chức điểm sạc dùng chung với khả
+              năng giám sát cục bộ và đa trạm.
+            </p>
+          </article>
+
+          <article class="card solution-card reveal">
+            <div class="solution-icon">
+              🅿️
+            </div>
+
+            <h3>
+              Bãi giữ xe
+            </h3>
+
+            <p>
+              Phân vùng rủi ro, lưu lịch sử và hỗ
+              trợ bố trí phương tiện.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SẢN PHẨM -->
+
+    <section
+      class="section section-soft"
+      id="san-pham"
+    >
+      <div class="container product-grid">
+        <div class="product-visual reveal">
+          <div class="cabinet">
+            <div class="station-top">
+              <strong>
+                EV_SAFE HUB
+              </strong>
+
+              <span class="online-status">
+                READY
+              </span>
+            </div>
+
+            <div class="cabinet-screen"></div>
+
+            <div class="cabinet-modules">
+              <div>
+                PMC-220 RS485
+              </div>
+
+              <div>
+                ESP32 CENTRAL
+              </div>
+
+              <div>
+                ARDUINO MEGA
+              </div>
+
+              <div>
+                RELAY & CONTACTOR
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="eyebrow">
+            Sản phẩm tích hợp
+          </div>
+
+          <h2>
+            Trạm sạc được thiết kế như một hệ thống
+            điều khiển hoàn chỉnh.
+          </h2>
+
+          <p>
+            Khối đo lường, gateway cảm biến, điều
+            khiển trung tâm, contactor, cảnh báo và
+            ứng dụng được tách thành mô-đun.
+          </p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <i>01</i>
+
+              <div>
+                <b>
+                  Đo điện năng chuyên dụng
+                </b>
+
+                <p>
+                  Điện áp, dòng điện, công suất và
+                  điện năng.
+                </p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <i>02</i>
+
+              <div>
+                <b>
+                  Điều khiển contactor có điều kiện
+                </b>
+
+                <p>
+                  Chỉ đóng điện khi đủ điều kiện
+                  an toàn.
+                </p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <i>03</i>
+
+              <div>
+                <b>
+                  Cảnh báo có giải thích
+                </b>
+
+                <p>
+                  Hiển thị nguyên nhân và mức
+                  phản ứng.
+                </p>
+              </div>
+            </div>
+
+            <div class="feature-item">
+              <i>04</i>
+
+              <div>
+                <b>
+                  Quản lý lịch sử phiên
+                </b>
+
+                <p>
+                  Lưu thời gian, năng lượng và
+                  sự kiện.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- QUY TRÌNH -->
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <div class="eyebrow">
+            Quy trình vận hành
+          </div>
+
+          <h2>
+            Từ xác thực đến lưu lịch sử trong năm bước.
+          </h2>
+        </div>
+
+        <div class="process-grid">
+          <article class="card process-step reveal">
+            <div class="process-number">
+              1
+            </div>
+
+            <h3>
+              Xác thực
+            </h3>
+
+            <p>
+              Chọn trạm, phương tiện và phương thức
+              xác thực.
+            </p>
+          </article>
+
+          <article class="card process-step reveal">
+            <div class="process-number">
+              2
+            </div>
+
+            <h3>
+              Kiểm tra an toàn
+            </h3>
+
+            <p>
+              Kiểm tra cảm biến và liên động.
+            </p>
+          </article>
+
+          <article class="card process-step reveal">
+            <div class="process-number">
+              3
+            </div>
+
+            <h3>
+              Bắt đầu sạc
+            </h3>
+
+            <p>
+              Đóng relay và contactor khi hợp lệ.
+            </p>
+          </article>
+
+          <article class="card process-step reveal">
+            <div class="process-number">
+              4
+            </div>
+
+            <h3>
+              Giám sát realtime
+            </h3>
+
+            <p>
+              Cập nhật điện, nhiệt và cảnh báo.
+            </p>
+          </article>
+
+          <article class="card process-step reveal">
+            <div class="process-number">
+              5
+            </div>
+
+            <h3>
+              Kết thúc và lưu
+            </h3>
+
+            <p>
+              Tổng hợp phiên thành lịch sử.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CÔNG NGHỆ -->
+
+    <section
+      class="section section-soft"
+      id="cong-nghe"
+    >
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">
+              Nền tảng công nghệ
+            </div>
+
+            <h2>
+              Phần cứng và phần mềm được phân lớp
+              rõ ràng.
+            </h2>
+          </div>
+
+          <p>
+            Đo lường, truyền dữ liệu, điều khiển,
+            giao diện và lưu lịch sử.
+          </p>
+        </div>
+
+        <div class="technology-grid">
+          <article class="card reveal">
+            <h3>
+              ESP32 Central
+            </h3>
+
+            <p>
+              Điều phối trạng thái, relay/contactor,
+              HTTP và WebSocket.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>
+              Arduino Mega
+            </h3>
+
+            <p>
+              Thu thập cảm biến, giao tiếp công tơ
+              và truyền dữ liệu.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>
+              PMC-220
+            </h3>
+
+            <p>
+              Đo điện áp, dòng điện, công suất và
+              điện năng qua Modbus RTU.
+            </p>
+          </article>
+
+          <article class="card reveal">
+            <h3>
+              Ứng dụng Flutter
+            </h3>
+
+            <p>
+              Giám sát, điều khiển, biểu đồ,
+              cảnh báo và lịch sử.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ỨNG DỤNG -->
+
+    <section
+      class="section"
+      id="ung-dung"
+    >
+      <div class="container application-grid">
+        <div class="phone-stage reveal">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-heading">
+                <small>
+                  EV_SAFE HUB
+                </small>
+
+                <h3 id="phoneTitle">
+                  Tổng quan trạm
+                </h3>
+              </div>
+
+              <div
+                class="phone-body"
+                id="phoneBody"
+              >
+                <div class="phone-card">
+                  <b>
+                    Trạm CBQ-01 — ONLINE
+                  </b>
+
+                  <p>
+                    Sẵn sàng
+                  </p>
+                </div>
+
+                <div class="phone-row">
+                  <div class="phone-card">
+                    220.8 V
+                  </div>
+
+                  <div class="phone-card">
+                    31.4°C
+                  </div>
+                </div>
+
+                <div class="phone-main-button">
+                  BẮT ĐẦU PHIÊN SẠC
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <div class="eyebrow">
+            Ứng dụng EV_SAFE HUB
+          </div>
+
+          <h2>
+            Điều khiển, theo dõi và giải thích trạng
+            thái trên điện thoại.
+          </h2>
+
+          <p>
+            Chọn trạm, bắt đầu phiên, xem cảnh báo,
+            lịch sử và xu hướng pin.
+          </p>
+
+          <div class="screen-selector">
+            <button
+              class="screen-button active"
+              type="button"
+              data-screen="overview"
+            >
+              Tổng quan
+            </button>
+
+            <button
+              class="screen-button"
+              type="button"
+              data-screen="session"
+            >
+              Phiên sạc realtime
+            </button>
+
+            <button
+              class="screen-button"
+              type="button"
+              data-screen="battery"
+            >
+              BQS / SOH tham khảo
+            </button>
+
+            <button
+              class="screen-button"
+              type="button"
+              data-screen="alerts"
+            >
+              Cảnh báo và lịch sử
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BÀI THUYẾT TRÌNH PDF XEM TRỰC TIẾP -->
+
+    <section
+      class="section section-soft"
+      id="bai-thuyet-trinh"
+    >
+      <div class="container">
+        <div class="section-heading center reveal">
+          <div class="eyebrow">
+            Bài thuyết trình dự án
+          </div>
+
+          <h2>
+            Xem bài thuyết trình trực tiếp trên website.
+          </h2>
+
+          <p>
+            Nội dung được dựng trực tiếp bằng PDF.js, có chuyển trang, thu phóng, xoay và toàn màn hình.
+          </p>
+        </div>
+
+        <div class="pdf-wrapper reveal">
+          <iframe
+            src="./pdfjs/viewer.html?file=../EV_SAFE_HUB_BAI_THUYET_TRINH_2026.pdf"
+            title="Trình xem bài thuyết trình EV_SAFE HUB 2026 bằng PDF.js"
+            loading="lazy"
+            allow="fullscreen"
+            allowfullscreen
+          ></iframe>
+        </div>
+
+        <div class="pdf-actions reveal">
+          <a
+            class="button button-primary"
+            href="./pdfjs/viewer.html?file=../EV_SAFE_HUB_BAI_THUYET_TRINH_2026.pdf"
+            target="_blank"
+            rel="noopener"
+          >
+            Mở trình xem toàn màn hình
+          </a>
+        </div>
+
+        <p class="viewer-note reveal">
+          Nếu khung chưa hiện, hãy nhấn “Mở trình xem toàn màn hình” hoặc tải lại trang.
+          Trình xem không đặt nút tải xuống trong giao diện.
+        </p>
+      </div>
+    </section>
+
+    <!-- VIDEO XEM TRỰC TIẾP -->
+
+    <section
+      class="section section-dark"
+      id="video-gioi-thieu"
+    >
+      <div class="container">
+        <div class="section-heading center reveal">
+          <div
+            class="eyebrow"
+            style="color:#68b7ff"
+          >
+            Video giới thiệu dự án
+          </div>
+
+          <h2>
+            Xem trực tiếp video EV_SAFE HUB.
+          </h2>
+
+          <p>
+            Video được phát ngay trên website,
+            không bắt buộc tải về.
+          </p>
+        </div>
+
+        <div class="video-wrapper reveal">
+          <video
+            controls
+            poster="./assets/video-poster.png"
+            controlslist="nodownload noremoteplayback"
+            preload="metadata"
+            playsinline
+          >
+            <source
+              src="https://github.com/nguyentantue2009-cloud/ev-safe-hub-2026/releases/latest/download/EV_SAFE_HUB_VIDEO_FINAL_1080P.mp4"
+              type="video/mp4"
+            >
+
+            Trình duyệt của bạn không hỗ trợ
+            phát video HTML5.
+          </video>
+        </div>
+
+        <div class="video-actions reveal">
+          <a
+            class="button"
+            href="https://github.com/nguyentantue2009-cloud/ev-safe-hub-2026/releases/latest/download/EV_SAFE_HUB_VIDEO_FINAL_1080P.mp4"
+            target="_blank"
+            rel="noopener"
+          >
+            Mở video trong tab mới
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUNG TÂM TÀI LIỆU -->
+
+    <section
+      class="section section-soft"
+      id="tai-xuong"
+    >
+      <div class="container">
+        <div class="download-shell reveal">
+          <div>
+            <div class="eyebrow">
+              Trung tâm tài liệu
+            </div>
+
+            <h2>
+              Tất cả tài nguyên chính thức trong
+              một nơi.
+            </h2>
+
+            <p>
+              Mở trực tiếp PDF, xem video trên trang
+              và tải APK Android.
+            </p>
+          </div>
+
+          <div class="download-list">
+            <!-- KHÔNG CÓ THUỘC TÍNH DOWNLOAD -->
+
+            <a
+              class="download-item"
+              href="#bai-thuyet-trinh"
+            >
+              <span class="download-information">
+                <span class="download-icon">
+                  PDF
+                </span>
+
+                <span>
+                  <b>
+                    Bài thuyết trình PDF 2026
+                  </b>
+
+                  <small>
+                    Mở trực tiếp trên trình duyệt
+                  </small>
+                </span>
+              </span>
+
+              <span class="download-action">
+                Xem trực tiếp
+              </span>
+            </a>
+
+            <a
+              class="download-item"
+              href="#video-gioi-thieu"
+            >
+              <span class="download-information">
+                <span class="download-icon">
+                  ▶
+                </span>
+
+                <span>
+                  <b>
+                    Video giới thiệu Full HD
+                  </b>
+
+                  <small>
+                    Xem ngay trên website
+                  </small>
+                </span>
+              </span>
+
+              <span class="download-action">
+                Xem video
+              </span>
+            </a>
+
+            <a
+              class="download-item"
+              href="https://github.com/nguyentantue2009-cloud/ev-safe-hub-2026/releases/latest/download/EV_SAFE_HUB_ANDROID.apk"
+              download="EV_SAFE_HUB_ANDROID.apk"
+            >
+              <span class="download-information">
+                <span class="download-icon">
+                  APK
+                </span>
+
+                <span>
+                  <b>
+                    Ứng dụng Android
+                  </b>
+
+                  <small>
+                    Tải file APK chính thức
+                  </small>
+                </span>
+              </span>
+
+              <span class="download-action">
+                Tải APK
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HƯỚNG DẪN CÀI APK -->
+
+    <section
+      class="section"
+      id="cai-app"
+    >
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">
+              Hướng dẫn cài ứng dụng
+            </div>
+
+            <h2>
+              Tải và cài EV_SAFE HUB trên Android.
+            </h2>
+          </div>
+
+          <p>
+            File APK được phân phối qua GitHub Release chính thức,
+            giúp tải ổn định mà không làm repository quá nặng.
+          </p>
+        </div>
+
+        <div class="installation-grid">
+          <article class="card installation-card reveal">
+            <div class="installation-image">
+              <div class="mini-phone">
+                TẢI
+                <br>
+                APK
+              </div>
+            </div>
+
+            <div class="installation-body">
+              <div class="process-number">
+                1
+              </div>
+
+              <h3>
+                Nhấn tải APK
+              </h3>
+
+              <p>
+                Chờ trình duyệt tải file
+                EV_SAFE_HUB_ANDROID.apk.
+              </p>
+            </div>
+          </article>
+
+          <article class="card installation-card reveal">
+            <div class="installation-image">
+              <div class="mini-phone">
+                DOWNLOAD
+              </div>
+            </div>
+
+            <div class="installation-body">
+              <div class="process-number">
+                2
+              </div>
+
+              <h3>
+                Mở thư mục Download
+              </h3>
+
+              <p>
+                Mở Quản lý tệp hoặc Tệp của tôi.
+              </p>
+            </div>
+          </article>
+
+          <article class="card installation-card reveal">
+            <div class="installation-image">
+              <div class="mini-phone">
+                CHO PHÉP
+                <br>
+                CÀI ĐẶT
+              </div>
+            </div>
+
+            <div class="installation-body">
+              <div class="process-number">
+                3
+              </div>
+
+              <h3>
+                Cho phép nguồn này
+              </h3>
+
+              <p>
+                Cho phép trình duyệt hoặc Quản lý
+                tệp cài ứng dụng không xác định.
+              </p>
+            </div>
+          </article>
+
+          <article class="card installation-card reveal">
+            <div class="installation-image">
+              <div class="mini-phone">
+                CÀI ĐẶT
+              </div>
+            </div>
+
+            <div class="installation-body">
+              <div class="process-number">
+                4
+              </div>
+
+              <h3>
+                Cài và mở ứng dụng
+              </h3>
+
+              <p>
+                Nhấn Cài đặt, sau đó chọn Mở.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <div
+          style="
+            text-align:center;
+            margin-top:24px
+          "
+        >
+          <a
+            class="button button-teal"
+            href="https://github.com/nguyentantue2009-cloud/ev-safe-hub-2026/releases/latest/download/EV_SAFE_HUB_ANDROID.apk"
+            download="EV_SAFE_HUB_ANDROID.apk"
+          >
+            ↓ Tải EV_SAFE HUB Android
+          </a>
+        </div>
+
+        <div class="apk-help reveal">
+          <h3>
+            Nếu APK báo lỗi 404 hoặc không tải được
+          </h3>
+
+          <p>
+            Mở mục <b>Releases</b> của repository, bảo đảm bản phát hành mới nhất
+            đã được <b>Publish</b> và có đúng asset
+            <code>EV_SAFE_HUB_ANDROID.apk</code>. Không để release ở trạng thái
+            Draft hoặc chỉ là Pre-release.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ĐỘI NGŨ -->
+
+    <section class="section section-soft">
+      <div class="container">
+        <div class="section-heading reveal">
+          <div>
+            <div class="eyebrow">
+              Đơn vị thực hiện
+            </div>
+
+            <h2>
+              Dự án sáng tạo kỹ thuật năm 2026.
+            </h2>
+          </div>
+
+          <p>
+            Trường THPT Cao Bá Quát —
+            Phường Tam Anh, thành phố Đà Nẵng.
+          </p>
+        </div>
+
+        <div class="team-grid">
+          <div class="card">
+            <h3>
+              Nhóm tác giả
+            </h3>
+
+            <p>
+              Nguyễn Tấn Tuệ, Nguyễn Tấn Tường,
+              Bành Dương Tiến Sĩ, Đặng Bảo Ngọc,
+              Doãn Thị Thuỷ Tiên.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3>
+              Người hướng dẫn
+            </h3>
+
+            <p>
+              Võ Phi Liên.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+
+    <section class="section">
+      <div class="container">
+        <div class="section-heading center reveal">
+          <div class="eyebrow">
+            Câu hỏi thường gặp
+          </div>
+
+          <h2>
+            Thông tin cần biết trước khi sử dụng.
+          </h2>
+        </div>
+
+        <div class="faq-list reveal">
+          <div class="faq-item open">
+            <button
+              class="faq-question"
+              type="button"
+            >
+              EV_SAFE HUB có phải trạm sạc thương mại
+              đã chứng nhận không?
+
+              <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                Hiện tại đây là nguyên mẫu nghiên cứu
+                và giáo dục.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+            >
+              Ứng dụng có cần Internet không?
+
+              <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                Hệ thống được thiết kế theo hướng
+                local-first và có thể giao tiếp trong
+                mạng nội bộ.
+              </p>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button
+              class="faq-question"
+              type="button"
+            >
+              Tại sao Android cảnh báo khi cài APK?
+
+              <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+              <p>
+                APK được cài ngoài Google Play nên
+                Android có thể yêu cầu cấp quyền cài
+                ứng dụng không xác định.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIÊN HỆ -->
+
+    <section
+      class="section"
+      id="lien-he"
+    >
+      <div class="container">
+        <div class="contact-shell reveal">
+          <div>
+            <div
+              class="eyebrow"
+              style="color:#62d9c5"
+            >
+              Liên hệ dự án
+            </div>
+
+            <h2>
+              Trao đổi về mô hình, tài liệu và khả
+              năng phát triển.
+            </h2>
+
+            <p>
+              Liên hệ nhóm EV_SAFE HUB để được hỗ trợ
+              hồ sơ, ứng dụng và kỹ thuật.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                class="button button-teal"
+                href="tel:+84886763194"
+              >
+                ☎ Gọi 0886 763 194
+              </a>
+
+              <a
+                class="button"
+                href="https://zalo.me/0886763194"
+                target="_blank"
+                rel="noopener"
+              >
+                Zalo tư vấn
+              </a>
+            </div>
+          </div>
+
+          <div class="contact-list">
+            <a
+              class="contact-item"
+              href="tel:+84886763194"
+            >
+              <b>
+                Điện thoại
+              </b>
+
+              <br>
+
+              0886 763 194
+            </a>
+
+            <a
+              class="contact-item"
+              href="mailto:nguyentantue2009@gmail.com"
+            >
+              <b>
+                Email
+              </b>
+
+              <br>
+
+              nguyentantue2009@gmail.com
+            </a>
+
+            <div class="contact-item">
+              <b>
+                Địa chỉ
+              </b>
+
+              <br>
+
+              Trường THPT Cao Bá Quát,
+              phường Tam Anh,
+              thành phố Đà Nẵng
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <a
+            class="brand"
+            href="#top"
+          >
+            <span class="brand-mark">
+              EV
+            </span>
+
+            <span>
+              <strong>
+                EV_SAFE HUB
+              </strong>
+            </span>
+          </a>
+
+          <p>
+            Hệ thống trạm sạc xe điện thông minh.
+          </p>
+        </div>
+
+        <div>
+          <h3>
+            Khám phá
+          </h3>
+
+          <a href="#giai-phap">
+            Giải pháp
+          </a>
+
+          <a href="#san-pham">
+            Sản phẩm
+          </a>
+
+          <a href="#cong-nghe">
+            Công nghệ
+          </a>
+        </div>
+
+        <div>
+          <h3>
+            Tài nguyên
+          </h3>
+
+          <a href="#bai-thuyet-trinh">
+            Bài thuyết trình PDF
+          </a>
+
+          <a href="#video-gioi-thieu">
+            Video giới thiệu
+          </a>
+
+          <a
+            href="https://github.com/nguyentantue2009-cloud/ev-safe-hub-2026/releases/latest/download/EV_SAFE_HUB_ANDROID.apk"
+            download="EV_SAFE_HUB_ANDROID.apk"
+          >
+            Ứng dụng Android
+          </a>
+        </div>
+
+        <div>
+          <h3>
+            Liên hệ
+          </h3>
+
+          <a href="tel:+84886763194">
+            0886 763 194
+          </a>
+
+          <a href="mailto:nguyentantue2009@gmail.com">
+            nguyentantue2009@gmail.com
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>
+          © 2026 Nhóm dự án EV_SAFE HUB.
+        </span>
+
+        <span>
+          Nguyên mẫu nghiên cứu và giáo dục.
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <a
+    class="back-top"
+    id="backTop"
+    href="#top"
+    aria-label="Quay lại đầu trang"
+  >
+    ↑
+  </a>
+
+  <script>
+    const root =
+      document.documentElement;
+
+    const siteHeader =
+      document.getElementById("siteHeader");
+
+    const mainNav =
+      document.getElementById("mainNav");
+
+    const menuButton =
+      document.getElementById("menuButton");
+
+    const themeToggle =
+      document.getElementById("themeToggle");
+
+    const backTop =
+      document.getElementById("backTop");
+
+    function updateThemeButton() {
+      const isDark =
+        root.dataset.theme === "dark";
+
+      themeToggle.textContent =
+        isDark ? "☀" : "☾";
+
+      document
+        .querySelector(
+          'meta[name="theme-color"]'
+        )
+        .setAttribute(
+          "content",
+          isDark
+            ? "#07111e"
+            : "#f4f8fc"
+        );
+    }
+
+    updateThemeButton();
+
+    themeToggle.addEventListener(
+      "click",
+      () => {
+        root.dataset.theme =
+          root.dataset.theme === "dark"
+            ? "light"
+            : "dark";
+
+        localStorage.setItem(
+          "evsh-theme",
+          root.dataset.theme
+        );
+
+        updateThemeButton();
+      }
+    );
+
+    menuButton.addEventListener(
+      "click",
+      () => {
+        mainNav.classList.toggle(
+          "open"
+        );
+      }
+    );
+
+    mainNav
+      .querySelectorAll("a")
+      .forEach(
+        (link) => {
+          link.addEventListener(
+            "click",
+            () => {
+              mainNav.classList.remove(
+                "open"
+              );
+            }
+          );
+        }
+      );
+
+    window.addEventListener(
+      "scroll",
+      () => {
+        siteHeader.classList.toggle(
+          "scrolled",
+          window.scrollY > 20
+        );
+
+        backTop.classList.toggle(
+          "show",
+          window.scrollY > 650
+        );
+      },
+      {
+        passive: true
+      }
+    );
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries) => {
+          entries.forEach(
+            (entry) => {
+              if (
+                entry.isIntersecting
+              ) {
+                entry.target.classList.add(
+                  "visible"
+                );
+
+                revealObserver.unobserve(
+                  entry.target
+                );
+              }
+            }
+          );
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach(
+        (element) => {
+          revealObserver.observe(
+            element
+          );
+        }
+      );
+
+    document
+      .querySelectorAll(
+        ".faq-question"
+      )
+      .forEach(
+        (button) => {
+          button.addEventListener(
+            "click",
+            () => {
+              button
+                .closest(".faq-item")
+                .classList.toggle(
+                  "open"
+                );
+            }
+          );
+        }
+      );
+
+    const phoneViews = {
+      overview: {
+        title:
+          "Tổng quan trạm",
+
+        content: `
+          <div class="phone-card">
+            <b>Trạm CBQ-01 — ONLINE</b>
+            <p>Sẵn sàng</p>
+          </div>
+
+          <div class="phone-row">
+            <div class="phone-card">
+              220.8 V
+            </div>
+
+            <div class="phone-card">
+              31.4°C
+            </div>
+          </div>
+
+          <div class="phone-main-button">
+            BẮT ĐẦU PHIÊN SẠC
+          </div>
+        `
+      },
+
+      session: {
+        title:
+          "Phiên sạc realtime",
+
+        content: `
+          <div class="phone-card">
+            <b>Đang sạc — 362 W</b>
+            <p>Điện năng 0.11 kWh</p>
+          </div>
+
+          <div class="phone-row">
+            <div class="phone-card">
+              1.67 A
+            </div>
+
+            <div class="phone-card">
+              32.1°C
+            </div>
+          </div>
+
+          <div class="phone-main-button">
+            KẾT THÚC PHIÊN
+          </div>
+        `
+      },
+
+      battery: {
+        title:
+          "Xu hướng sức khỏe pin",
+
+        content: `
+          <div class="phone-card">
+            <b>BQS 74 / 100</b>
+            <p>Xu hướng ổn định</p>
+          </div>
+
+          <div class="phone-row">
+            <div class="phone-card">
+              SOH 86%
+            </div>
+
+            <div class="phone-card">
+              14 phiên
+            </div>
+          </div>
+
+          <div class="phone-main-button">
+            XEM PHÂN TÍCH
+          </div>
+        `
+      },
+
+      alerts: {
+        title:
+          "Cảnh báo và lịch sử",
+
+        content: `
+          <div class="phone-card">
+            <b>Tải khu vực cao</b>
+            <p>
+              Hệ thống đã giảm giới hạn dòng
+            </p>
+          </div>
+
+          <div class="phone-main-button">
+            XEM LỊCH SỬ
+          </div>
+        `
+      }
+    };
+
+    document
+      .querySelectorAll(
+        ".screen-button"
+      )
+      .forEach(
+        (button) => {
+          button.addEventListener(
+            "click",
+            () => {
+              document
+                .querySelectorAll(
+                  ".screen-button"
+                )
+                .forEach(
+                  (item) => {
+                    item.classList.remove(
+                      "active"
+                    );
+                  }
+                );
+
+              button.classList.add(
+                "active"
+              );
+
+              const view =
+                phoneViews[
+                  button.dataset.screen
+                ];
+
+              document
+                .getElementById(
+                  "phoneTitle"
+                )
+                .textContent =
+                  view.title;
+
+              document
+                .getElementById(
+                  "phoneBody"
+                )
+                .innerHTML =
+                  view.content;
+            }
+          );
+        }
+      );
+  </script>
+</body>
+</html>
