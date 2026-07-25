@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark light">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>EV SAFE HUB – Bài thuyết trình</title>
+  <link rel="stylesheet" href="./viewer.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <header class="toolbar" aria-label="Thanh công cụ xem PDF">
+      <div class="brand" title="EV SAFE HUB">
+        <span class="brand-mark" aria-hidden="true">EV</span>
+        <span class="brand-text">EV SAFE HUB</span>
+      </div>
+
+      <div class="toolbar-group navigation" aria-label="Điều hướng trang">
+        <button id="prevPage" class="tool-button" type="button" aria-label="Trang trước" title="Trang trước (←)">‹</button>
+        <label class="page-control" title="Nhập số trang">
+          <span class="sr-only">Trang hiện tại</span>
+          <input id="pageNumber" type="number" inputmode="numeric" min="1" value="1" aria-label="Trang hiện tại">
+          <span class="page-total">/ <span id="pageCount">–</span></span>
+        </label>
+        <button id="nextPage" class="tool-button" type="button" aria-label="Trang sau" title="Trang sau (→)">›</button>
+      </div>
+
+      <div class="toolbar-group zoom" aria-label="Điều chỉnh thu phóng">
+        <button id="zoomOut" class="tool-button" type="button" aria-label="Thu nhỏ" title="Thu nhỏ (-)">−</button>
+        <button id="fitWidth" class="zoom-value" type="button" title="Vừa chiều rộng (0)"><span id="zoomValue">Vừa rộng</span></button>
+        <button id="zoomIn" class="tool-button" type="button" aria-label="Phóng to" title="Phóng to (+)">+</button>
+      </div>
+
+      <div class="toolbar-group actions" aria-label="Tùy chọn hiển thị">
+        <button id="rotatePage" class="tool-button icon-text" type="button" aria-label="Xoay trang" title="Xoay trang">↻<span>Xoay</span></button>
+        <button id="fullscreen" class="tool-button icon-text" type="button" aria-label="Toàn màn hình" title="Toàn màn hình (F)">⛶<span>Toàn màn hình</span></button>
+      </div>
+    </header>
+
+    <main id="viewerContainer" class="viewer-container" tabindex="0" aria-label="Nội dung bài thuyết trình PDF">
+      <div id="loading" class="status-card" role="status" aria-live="polite">
+        <div class="spinner" aria-hidden="true"></div>
+        <strong>Đang tải bài thuyết trình…</strong>
+        <span>Vui lòng chờ trong giây lát.</span>
+      </div>
+
+      <div id="errorPanel" class="status-card error" role="alert" hidden>
+        <strong>Không mở được tệp PDF</strong>
+        <p id="errorMessage">Hãy kiểm tra lại tên tệp và đường dẫn.</p>
+        <button id="retry" type="button">Thử lại</button>
+      </div>
+
+      <section id="pageStage" class="page-stage" aria-label="Trang PDF" hidden>
+        <div id="canvasFrame" class="canvas-frame">
+          <canvas id="pdfCanvas"></canvas>
+        </div>
+      </section>
+    </main>
+
+    <footer class="mobile-hint" id="mobileHint">
+      Vuốt ngang hoặc dùng nút ‹ › để đổi trang
+    </footer>
+  </div>
+
+  <noscript>Trình duyệt cần bật JavaScript để xem bài thuyết trình.</noscript>
+  <script type="module" src="./viewer.mjs"></script>
+</body>
+</html>
